@@ -2,9 +2,12 @@ package ba.biggy.config;
 
 import javax.sql.DataSource;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -29,6 +32,14 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         resolver.setSuffix(".jsp");
         return resolver;
     }
+	
+	@Bean
+	public MessageSource messageSource() {
+	    ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+	    messageSource.setBasename("/WEB-INF/messages/messages");
+	    messageSource.setDefaultEncoding("UTF-8");
+	    return messageSource;
+	} 
 	
 	
 	@Override

@@ -2,6 +2,11 @@ package ba.biggy.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Fault {
 	
 	private int idFault;
@@ -14,7 +19,13 @@ public class Fault {
 	private String clientPlace;
 	private String clientPhoneOne;
 	private String clientPhoneTwo;
+	
+	@NotEmpty
+	@Email
 	private String clientEmail;
+	
+	@NotEmpty (message = "Fault description empty")
+	@Size(min = 6, max = 15, message = "Your text must between 6 and 15 characters")
 	private String faultDescription;
 	private String faultNote;
 	private String faultIssuedTo;
