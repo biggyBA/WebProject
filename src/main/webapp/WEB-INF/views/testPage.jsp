@@ -10,6 +10,11 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Test page</title>
+		<style>
+		#errorMessage{
+		color: red;
+		}
+		</style>
 	</head>
 	
 	
@@ -22,7 +27,10 @@
                 <tr>
                     <td align="left" width="20%">Email: </td>
                     <td align="left" width="40%"><form:input path="clientEmail" size="30"/></td>
-                    <td align="left"><form:errors path="clientEmail" cssClass="error"/></td>
+                </tr>
+                <tr>
+                	<td width="20%"/>
+                    <td align="left" width="40%" id="errorMessage"><form:errors path="clientEmail" cssClass="error"/></td>
                 </tr>
                 <tr>
                     <td>Password: </td>

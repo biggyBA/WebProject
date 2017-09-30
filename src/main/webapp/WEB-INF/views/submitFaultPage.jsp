@@ -164,7 +164,7 @@
 		            		 	
 							</table>
 						
-							<input type="submit" value="Submit fault" id="submitBtn" onclick="myFunction()"/>
+							<input type="submit" value="Submit fault" id="submitBtn"/>
 						
 						</form:form>
 			
