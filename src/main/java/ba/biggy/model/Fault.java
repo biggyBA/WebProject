@@ -10,24 +10,39 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Fault {
 	
 	private int idFault;
+	
 	private Date dateTime;
+	
 	private String productSerialNumber;
+	
 	private String productId;
+	
 	private String productType;
+	
+	@NotEmpty
 	private String clientName;
+	
+	@NotEmpty
 	private String clientStreet;
+	
+	@NotEmpty
 	private String clientPlace;
+	
+	@NotEmpty
 	private String clientPhoneOne;
+	
 	private String clientPhoneTwo;
 	
 	@NotEmpty
 	@Email
 	private String clientEmail;
 	
-	@NotEmpty (message = "Fault description empty")
-	@Size(min = 6, max = 15, message = "Your text must between 6 and 15 characters")
+	@NotEmpty
+	@Size(min = 10)
 	private String faultDescription;
+	
 	private String faultNote;
+	
 	private String faultIssuedTo;
 	private String faultIssuedBy;
 	private String faultType;

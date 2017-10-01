@@ -1,5 +1,7 @@
 package ba.biggy.config;
 
+import java.util.Locale;
+
 import javax.sql.DataSource;
 
 import org.springframework.context.MessageSource;
@@ -11,8 +13,11 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import ba.biggy.dao.FaultDAO;
@@ -40,6 +45,27 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	    messageSource.setDefaultEncoding("UTF-8");
 	    return messageSource;
 	} 
+	
+    @Bean
+    public CookieLocaleResolver localeResolver(){
+        CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+        localeResolver.setDefaultLocale(Locale.GERMAN);
+        localeResolver.setCookieName("my-locale-cookie");
+        localeResolver.setCookieMaxAge(3600);
+        return localeResolver;
+    }
+
+    @Bean
+    public LocaleChangeInterceptor localeInterceptor(){
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("lang");
+        return interceptor;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(localeInterceptor());
+    }
 	
 	
 	@Override

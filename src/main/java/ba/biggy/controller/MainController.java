@@ -50,6 +50,7 @@ public class MainController {
     public String doLogin(@Valid @ModelAttribute("fault") Fault fault,
             BindingResult result, Map<String, Object> model) {
  
+    	
         if (result.hasErrors()) {
             return "testPage";
         }

@@ -1,6 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <html>
 
@@ -37,7 +38,7 @@
 					        	
 					        	<!-- Product id -->
 					        	<tr>
-					        		<td>Product ID</td>
+					        		<td><spring:message code="label.productID"/></td>
 					        		<td>
 					        			<form:select path="productId">
 											<form:option value="" label="Select product type"/>

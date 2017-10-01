@@ -44,6 +44,8 @@
                 </tr>
         </form:form>
         </table>
+        
+        <spring:message code="label.lastName" />
     </div>
 	
 	
