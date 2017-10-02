@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +26,7 @@ public class SubmitFaultController {
 	private FaultDAO faultDAO;
 	
 	
-	@RequestMapping(value="/submitFault")
+	@RequestMapping(value="/submitFault", method = RequestMethod.GET)
 	public ModelAndView showSubmitFault(ModelAndView model) throws IOException{
 	    Fault fault = new Fault();
 	    model.addObject("fault", fault);
@@ -32,11 +34,20 @@ public class SubmitFaultController {
 	    return model;
 	}
 	
-	@RequestMapping(value = "/saveFault", method = RequestMethod.POST)
-	public ModelAndView saveFault(@ModelAttribute Fault fault) {
+	@RequestMapping(value = "/submitFault", method = RequestMethod.POST)
+	public ModelAndView saveFault(@Valid @ModelAttribute Fault fault, 
+			BindingResult result, ModelAndView model) {
+		
+		if (result.hasErrors()) {
+			model.setViewName("submitFaultPage");
+			return model;
+		}
+		
 		faultDAO.saveOrUpdate(fault);
-	    return new ModelAndView("redirect:/faultsOverview");
+		model.setViewName("redirect:/faultsOverview");
+	    return model;
 	}
+	
 	
 	
 	

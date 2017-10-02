@@ -8,12 +8,13 @@
 	<head>
 		<link href="<c:url value="/resources/css/submitFaultPage.css" />" rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<script type="text/javascript">
-			var nowDateTime = new Date();
-			var labelDateTime = document.getElementById("dateTimeLabel");
-			labelDateTime.value = nowDateTime;
-		</script>
 		
+		<style>
+		#errorMessage{
+		color: red;
+		padding-left: 25px;
+		}
+		</style>
 		
 		
 		<title>Submit fault</title>
@@ -26,12 +27,16 @@
 		
 			<div id="leftBlock">
 			
-					<form:form action="saveFault" method="post" modelAttribute="fault">
+					<form:form action="submitFault" method="post" modelAttribute="fault">
 							
 							<table>
 								<!-- Date and time now -->
 								<form:input path="dateTime" type="hidden" id="dateTimeLabel"/>
-								
+								<script type="text/javascript">
+									var nowDateTime = new Date();
+									var labelDateTime = document.getElementById("dateTimeLabel");
+									labelDateTime.value = nowDateTime;
+								</script>
 					
 								<!-- Fault status -->
 					        	<form:input path="faultStatus" type="hidden" value="UrgentToDo"/>
@@ -46,18 +51,26 @@
 										</form:select>
 					        		</td>
 					        	</tr>
+					        	<tr><td></td>
+					        	<td id="errorMessage"><form:errors path="productId"/></td>
+					        	</tr>
+					        	
 					        	
 					        	<!-- Product serial number -->
 					        	<tr>
-					        		<td>Product S/N</td>
+					        		<td><spring:message code="label.productSerialNumber"/></td>
 					        		<td>
 					        			<form:input path="productSerialNumber" type="text" placeholder="Serial number"/>
 					        		</td>
 					        	</tr>
+					        	<tr><td></td>
+					        	<td id="errorMessage"><form:errors path="productSerialNumber"/></td>
+					        	</tr>
+					        	
 					        	
 					        	<!-- Client name -->
 								<tr>
-									<td>Client name</td>
+									<td><spring:message code="label.clientName"/></td>
 									<td>
 										<form:input path="clientName" type="text" placeholder="Name"/>
 									</td>
@@ -65,7 +78,7 @@
 								
 								<!-- Client street -->
 								<tr>
-									<td>Client street</td>
+									<td><spring:message code="label.clientStreet"/></td>
 									<td>
 										<form:input path="clientStreet" type="text" placeholder="Street"/>
 									</td>
@@ -73,7 +86,7 @@
 								
 								<!-- Client place -->
 								<tr>
-									<td>Client place</td>
+									<td><spring:message code="label.clientPlace"/></td>
 									<td>
 										<form:input path="clientPlace" type="text" placeholder="Place"/>
 									</td>
@@ -81,7 +94,7 @@
 								
 								<!-- Client phone number one -->
 								<tr>
-									<td>Client Phone #1</td>
+									<td><spring:message code="label.clientPhoneOne"/></td>
 									<td>
 										<form:input path="clientPhoneOne" type="text" placeholder="Phone #1"/>
 									</td>
@@ -89,7 +102,7 @@
 								
 								<!-- Client phone number two --> 
 								<tr>
-									<td>Client Phone #2</td>
+									<td><spring:message code="label.clientPhoneTwo"/></td>
 									<td>
 										<form:input path="clientPhoneTwo" type="text" placeholder="Phone #2"/>
 									</td>
@@ -97,7 +110,7 @@
 								
 								<!-- Client email --> 
 								<tr>
-									<td>Client E-mail</td>
+									<td><spring:message code="label.clientEmail"/></td>
 									<td>
 										<form:input path="clientEmail" type="text" placeholder="E-mail"/>
 									</td>
@@ -105,7 +118,7 @@
 						    	
 						    	<!-- Fault description --> 
 								<tr>
-									<td>Fault description</td>
+									<td><spring:message code="label.faultDescription"/></td>
 									<td>
 										<form:textarea path="faultDescription" cols="30" rows="5" placeholder="Fault description"/>
 						   			</td>
@@ -113,7 +126,7 @@
 						    
 						    	<!-- Fault note --> 
 								<tr>
-									<td>Fault note</td>
+									<td><spring:message code="label.faultNote"/></td>
 									<td>
 										<form:textarea path="faultNote" cols="30" rows="5" placeholder="Fault note"/>
 									</td>
@@ -121,7 +134,7 @@
 						    
 						    	<!-- Fault issued to -->
 						    	<tr>
-						    		<td>Fault issued to</td>
+						    		<td><spring:message code="label.faultIssuedTo"/></td>
 						    		<td>
 						            	<form:select path="faultIssuedTo">
 											<form:option value="" label="Select"/>
@@ -132,7 +145,7 @@
 		            		
 		            			<!-- Fault issued by -->
 						    	<tr>
-						    		<td>Fault issued by</td>
+						    		<td><spring:message code="label.faultIssuedBy"/></td>
 						    		<td>
 						            	<form:select path="faultIssuedBy">
 											<form:option value="" label="Select"/>
@@ -143,7 +156,7 @@
 		            		
 		            			<!-- Fault type -->
 						    	<tr>
-						    		<td>Fault type</td>
+						    		<td><spring:message code="label.faultType"/></td>
 						    		<td>
 						            	<form:select path="faultType">
 											<form:option value="" label="Select"/>
@@ -154,7 +167,7 @@
 		            		
 			            		<!-- Fault priority -->
 							    <tr>
-						    		<td>Fault type</td>
+						    		<td><spring:message code="label.faultPriority"/></td>
 						    		<td>
 						            	<form:select path="faultPriority">
 											<form:option value="" label="Select"/>
@@ -165,7 +178,7 @@
 		            		 	
 							</table>
 						
-							<input type="submit" value="Submit fault" id="submitBtn"/>
+							<input type="submit" value=<spring:message code="label.submitButton"/> id="submitBtn"/>
 						
 						</form:form>
 			
@@ -191,7 +204,7 @@
 					        	
 					        	<!-- Product id -->
 					        	<tr>
-					        		<td>Product ID</td>
+					        		<td><spring:message code="label.productID"/></td>
 					        		<td>
 					        			<form:select path="productId">
 											<form:option value="" label="Select product type"/>
@@ -202,7 +215,7 @@
 					        	
 					        	<!-- Product serial number -->
 					        	<tr>
-					        		<td>Product S/N</td>
+					        		<td><spring:message code="label.productSerialNumber"/></td>
 					        		<td>
 					        			<form:input path="productSerialNumber" type="text" placeholder="Serial number"/>
 					        		</td>
@@ -210,7 +223,7 @@
 					        	
 					        	<!-- Client name -->
 								<tr>
-									<td>Client name</td>
+									<td><spring:message code="label.clientName"/></td>
 									<td>
 										<form:input path="clientName" type="text" placeholder="Name"/>
 									</td>
@@ -218,7 +231,7 @@
 								
 								<!-- Client street -->
 								<tr>
-									<td>Client street</td>
+									<td><spring:message code="label.clientStreet"/></td>
 									<td>
 										<form:input path="clientStreet" type="text" placeholder="Street"/>
 									</td>
@@ -226,7 +239,7 @@
 								
 								<!-- Client place -->
 								<tr>
-									<td>Client place</td>
+									<td><spring:message code="label.clientPlace"/></td>
 									<td>
 										<form:input path="clientPlace" type="text" placeholder="Place"/>
 									</td>
@@ -234,7 +247,7 @@
 								
 								<!-- Client phone number one -->
 								<tr>
-									<td>Client Phone #1</td>
+									<td><spring:message code="label.clientPhoneOne"/></td>
 									<td>
 										<form:input path="clientPhoneOne" type="text" placeholder="Phone #1"/>
 									</td>
@@ -242,7 +255,7 @@
 								
 								<!-- Client phone number two --> 
 								<tr>
-									<td>Client Phone #2</td>
+									<td><spring:message code="label.clientPhoneTwo"/></td>
 									<td>
 										<form:input path="clientPhoneTwo" type="text" placeholder="Phone #2"/>
 									</td>
@@ -250,7 +263,7 @@
 								
 								<!-- Client email --> 
 								<tr>
-									<td>Client E-mail</td>
+									<td><spring:message code="label.clientEmail"/></td>
 									<td>
 										<form:input path="clientEmail" type="text" placeholder="E-mail"/>
 									</td>
@@ -258,7 +271,7 @@
 						    	
 						    	<!-- Fault description --> 
 								<tr>
-									<td>Fault description</td>
+									<td><spring:message code="label.faultDescription"/></td>
 									<td>
 										<form:textarea path="faultDescription" cols="30" rows="5" placeholder="Fault description"/>
 						   			</td>
@@ -266,7 +279,7 @@
 						    
 						    	<!-- Fault note --> 
 								<tr>
-									<td>Fault note</td>
+									<td><spring:message code="label.faultNote"/></td>
 									<td>
 										<form:textarea path="faultNote" cols="30" rows="5" placeholder="Fault note"/>
 									</td>
@@ -274,7 +287,7 @@
 						    
 						    	<!-- Fault issued to -->
 						    	<tr>
-						    		<td>Fault issued to</td>
+						    		<td><spring:message code="label.faultIssuedTo"/></td>
 						    		<td>
 						            	<form:select path="faultIssuedTo">
 											<form:option value="" label="Select"/>
@@ -285,7 +298,7 @@
 		            		
 		            			<!-- Fault issued by -->
 						    	<tr>
-						    		<td>Fault issued by</td>
+						    		<td><spring:message code="label.faultIssuedBy"/></td>
 						    		<td>
 						            	<form:select path="faultIssuedBy">
 											<form:option value="" label="Select"/>
@@ -296,7 +309,7 @@
 		            		
 		            			<!-- Fault type -->
 						    	<tr>
-						    		<td>Fault type</td>
+						    		<td><spring:message code="label.faultType"/></td>
 						    		<td>
 						            	<form:select path="faultType">
 											<form:option value="" label="Select"/>
@@ -307,7 +320,7 @@
 		            		
 			            		<!-- Fault priority -->
 							    <tr>
-						    		<td>Fault type</td>
+						    		<td><spring:message code="label.faultPriority"/></td>
 						    		<td>
 						            	<form:select path="faultPriority">
 											<form:option value="" label="Select"/>
@@ -318,7 +331,7 @@
 		            		 	
 							</table>
 						
-							<input type="submit" value="Submit fault by JSON" id="submitBtnJSON"/>
+							<input type="submit" value=<spring:message code="label.submitButtonByJSON"/> id="submitBtnJSON"/>
 						
 						</form:form>
 					

@@ -2,13 +2,18 @@ package todo;
 
 public class Todo {
 
-	//TODO Define strings for submit fault form lables
+	//Define strings for submit fault form labels
 	
-	//TODO Define strings for submit fault form errors
+	//Define strings for submit fault form errors
 	
-	//TODO Change hard coded labels with tags
+	//Change hard coded labels with tags
 	
-	//TODO Add error tags to submit fault form
+	//Add error tags to submit fault form
+	
+	//Replace items in drop down lists in submit fault with entries from db
+	
+	
+	
 	
 	
 }

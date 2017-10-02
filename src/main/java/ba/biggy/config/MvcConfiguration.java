@@ -79,7 +79,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         
         //local db
-        dataSource.setUrl("jdbc:mysql://localhost:3306/webProjectDB");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/webprojectdb");
         dataSource.setUsername("root");
         dataSource.setPassword("admin");
         

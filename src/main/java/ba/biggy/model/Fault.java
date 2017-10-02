@@ -2,6 +2,7 @@ package ba.biggy.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -13,8 +14,10 @@ public class Fault {
 	
 	private Date dateTime;
 	
+	@NotEmpty
 	private String productSerialNumber;
 	
+	@NotEmpty
 	private String productId;
 	
 	private String productType;
