@@ -1,5 +1,6 @@
 package ba.biggy.model;
 
+
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
@@ -46,10 +47,18 @@ public class Fault {
 	
 	private String faultNote;
 	
+	@NotEmpty
 	private String faultIssuedTo;
+	
+	@NotEmpty
 	private String faultIssuedBy;
+	
+	@NotEmpty
 	private String faultType;
+	
+	@NotEmpty
 	private String faultPriority;
+	
 	private String faultStatus;
 	
 	public int getIdFault() {
@@ -64,8 +73,8 @@ public class Fault {
 		return dateTime;
 	}
 	
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
+	public void setDateTime(Date date) {
+		this.dateTime = date;
 	}
 	
 	public String getProductSerialNumber() {

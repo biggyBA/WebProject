@@ -58,8 +58,8 @@
                     <td>${fault.faultIssuedTo}</td>
                     <td>${fault.faultType}</td> 
                     <td><a href="${pageContext.request.contextPath}/editFault?id=${fault.idFault}">Edit</a></td>
-                    <td><a href="${pageContext.request.contextPath}/editFault?id=${fault.idFault}">Archive</a></td>
-                    <td><a href="${pageContext.request.contextPath}/editFault?id=${fault.idFault}">Delete</a></td>      
+                    <td><a href="${pageContext.request.contextPath}/archiveFault?id=${fault.idFault}">Archive</a></td>
+                    <td><a href="${pageContext.request.contextPath}/deleteFault?id=${fault.idFault}">Delete</a></td>      
                 </tr>
                 </c:forEach>  
                            

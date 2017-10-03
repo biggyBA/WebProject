@@ -5,7 +5,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
+
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import ba.biggy.global.Constants;
@@ -138,6 +141,39 @@ public class FaultDAOImpl implements FaultDAO {
 	 
 	    return faultsToDo;
 		
+	}
+
+
+	@Override
+	public Fault getFaultById(int faultId) {
+		String sql = "SELECT * FROM " + Constants.FAULT_TABLE_NAME + " WHERE " + Constants.FAULT_TABLE_ID_COLUMN + "=" + faultId;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<Fault>() {
+
+			@Override
+			public Fault extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					Fault fault = new Fault();
+					
+					fault.setIdFault(rs.getInt(Constants.FAULT_TABLE_ID_COLUMN));
+		            fault.setDateTime(rs.getDate(Constants.FAULT_TABLE_DATE_TIME_COLUMN));
+		            fault.setProductType(rs.getString(Constants.FAULT_TABLE_PRODUCT_TYPE_COLUMN));
+		            fault.setClientName(rs.getString(Constants.FAULT_TABLE_CLIENT_NAME_COLUMN));
+		            fault.setClientStreet(rs.getString(Constants.FAULT_TABLE_CLIENT_STREET_COLUMN));
+		            fault.setClientPlace(rs.getString(Constants.FAULT_TABLE_CLIENT_PLACE_COLUMN));
+		            fault.setClientPhoneOne(rs.getString(Constants.FAULT_TABLE_CLIENT_PHONE_ONE_COLUMN));
+		            fault.setClientPhoneTwo(rs.getString(Constants.FAULT_TABLE_CLIENT_PHONE_TWO_COLUMN));
+		            fault.setFaultDescription(rs.getString(Constants.FAULT_TABLE_FAULT_DESCRIPTION_COLUMN));
+		            fault.setFaultNote(rs.getString(Constants.FAULT_TABLE_FAULT_NOTE_COLUMN));
+		            fault.setFaultIssuedTo(rs.getString(Constants.FAULT_TABLE_FAULT_ISSUED_TO_COLUMN));
+		            fault.setFaultType(Constants.FAULT_TABLE_FAULT_TYPE_COLUMN);
+					
+		            
+					return fault;
+				}
+				return null;
+			}
+			
+		});
 	}
 
 }

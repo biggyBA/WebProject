@@ -9,4 +9,6 @@ public interface FaultDAO {
 	public void saveOrUpdate (Fault fault);
 	
 	public List<Fault> listToDoFaults();
+	
+	public Fault getFaultById (int faultId);
 }

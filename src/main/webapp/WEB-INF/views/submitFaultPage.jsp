@@ -8,15 +8,18 @@
 	<head>
 		<link href="<c:url value="/resources/css/submitFaultPage.css" />" rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		
-		<style>
+		<style type="text/css">
 		#errorMessage{
 		color: red;
-		padding-left: 25px;
+		padding-left: 22px;
+		font-size: 0.75em;
 		}
 		</style>
-		
-		
+		<script>
+		function myFunction() {
+		    alert("Function is not implemented");
+		}
+		</script>
 		<title>Submit fault</title>
 	</head>
 	
@@ -75,6 +78,10 @@
 										<form:input path="clientName" type="text" placeholder="Name"/>
 									</td>
 								</tr>
+								<tr><td></td>
+					        	<td id="errorMessage"><form:errors path="clientName"/></td>
+					        	</tr>
+					        	
 								
 								<!-- Client street -->
 								<tr>
@@ -83,6 +90,10 @@
 										<form:input path="clientStreet" type="text" placeholder="Street"/>
 									</td>
 								</tr>
+								<tr><td></td>
+					        	<td id="errorMessage"><form:errors path="clientStreet"/></td>
+					        	</tr>
+					        	
 								
 								<!-- Client place -->
 								<tr>
@@ -91,6 +102,10 @@
 										<form:input path="clientPlace" type="text" placeholder="Place"/>
 									</td>
 								</tr>
+								<tr><td></td>
+					        	<td id="errorMessage"><form:errors path="clientPlace"/></td>
+					        	</tr>
+					        	
 								
 								<!-- Client phone number one -->
 								<tr>
@@ -99,6 +114,10 @@
 										<form:input path="clientPhoneOne" type="text" placeholder="Phone #1"/>
 									</td>
 								</tr>
+								<tr><td></td>
+					        	<td id="errorMessage"><form:errors path="clientPhoneOne"/></td>
+					        	</tr>
+					        	
 								
 								<!-- Client phone number two --> 
 								<tr>
@@ -115,6 +134,10 @@
 										<form:input path="clientEmail" type="text" placeholder="E-mail"/>
 									</td>
 						    	</tr>
+						    	<tr><td></td>
+					        	<td id="errorMessage"><form:errors path="clientEmail"/></td>
+					        	</tr>
+					        	
 						    	
 						    	<!-- Fault description --> 
 								<tr>
@@ -123,6 +146,10 @@
 										<form:textarea path="faultDescription" cols="30" rows="5" placeholder="Fault description"/>
 						   			</td>
 						   		</tr>
+						   		<tr><td></td>
+					        	<td id="errorMessage"><form:errors path="faultDescription"/></td>
+					        	</tr>
+					        	
 						    
 						    	<!-- Fault note --> 
 								<tr>
@@ -131,6 +158,7 @@
 										<form:textarea path="faultNote" cols="30" rows="5" placeholder="Fault note"/>
 									</td>
 						      	</tr>
+						    
 						    
 						    	<!-- Fault issued to -->
 						    	<tr>
@@ -142,6 +170,10 @@
 										</form:select>	
 		            		 		</td>
 		            		 	</tr>
+		            		 	<tr><td></td>
+					        	<td id="errorMessage"><form:errors path="faultIssuedTo"/></td>
+					        	</tr>
+					        	
 		            		
 		            			<!-- Fault issued by -->
 						    	<tr>
@@ -153,6 +185,10 @@
 										</form:select>	
 		            				</td>
 		            		 	</tr>
+		            		 	<tr><td></td>
+					        	<td id="errorMessage"><form:errors path="faultIssuedBy"/></td>
+					        	</tr>
+					        	
 		            		
 		            			<!-- Fault type -->
 						    	<tr>
@@ -164,6 +200,10 @@
 										</form:select>	
 		            				</td>
 		            		 	</tr>
+		            		 	<tr><td></td>
+					        	<td id="errorMessage"><form:errors path="faultType"/></td>
+					        	</tr>
+					        	
 		            		
 			            		<!-- Fault priority -->
 							    <tr>
@@ -174,7 +214,10 @@
 										    <form:options  items="${usersList}"/>
 										</form:select>	
 		            				</td>
-		            		 	</tr>  
+		            		 	</tr>
+		            		 	<tr><td></td>
+					        	<td id="errorMessage"><form:errors path="faultPriority"/></td>
+					        	</tr>  
 		            		 	
 							</table>
 						
@@ -330,10 +373,12 @@
 		            		 	</tr>  
 		            		 	
 							</table>
-						
+							<!--  
 							<input type="submit" value=<spring:message code="label.submitButtonByJSON"/> id="submitBtnJSON"/>
-						
+							-->
+							
 						</form:form>
+						<button id="submitBtnJSON" onclick="myFunction()" ><spring:message code="label.submitButtonByJSON"/></button>
 					
 			</div> <!-- rightBlock end -->
 		
