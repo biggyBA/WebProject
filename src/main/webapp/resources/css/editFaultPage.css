@@ -7,24 +7,26 @@
 	width: 50%;
 	height:100%;
 	display: block;
-    background-color: #000033;
+    background-color: #ebebeb;
     float:left; 
     overflow-y: scroll;
-}
-
-#leftBlockInner{
-	width: 70%;
-  	margin: 0 auto;
-	height:100%;
 }
 
 #rightBlock {
 	width: 50%;
 	height:100%;
 	display: block;
-    background-color: #000033; 
+    background-color: #ebebeb; 
     float:left;
     overflow-y: scroll;
+}
+
+#submitBtnJSON {
+    background: rgb(242, 247, 247);
+    border: 1px solid black;
+    font-family: 'Merriweather', sans-serif;
+    color: black; 
+    font-size: 15px;
 }
 
 #submitBtn {
@@ -38,42 +40,42 @@
 select {
      border:0; outline:0;
      padding: 1em;
-     border-radius: 8px;
+     border-radius: 2px;
      display: block;
      margin-top: 1em;
      font-family: 'Merriweather', sans-serif;
      resize: none;
      position: relative;
      display: block;
-     margin : 10 auto;
+     margin : 3 auto;
      width: 88%;
   }
   
 textarea {
      border:0; outline:0;
      padding: 1em;
-     border-radius: 8px;
+     border-radius: 2px;
      display: block;
      margin-top: 1em;
      font-family: 'Merriweather', sans-serif;
      resize: none;
      position: relative;
      display: block;
-     margin : 10 auto;
+     margin : 3 auto;
      width: 88%;
   }
 
 input{
      border:0; outline:0;
      padding: 1em;
-     border-radius: 8px;
+     border-radius: 2px;
      display: block;
      margin-top: 1em;
      font-family: 'Merriweather', sans-serif;
      resize: none;
      position: relative;
      display: block;
-     margin : 10 auto;
+     margin : 3 auto;
      width: 88%;
   }
   
@@ -85,7 +87,52 @@ label{
 	color: white;
 	font-weight: bold;
 }
- 
-td{
-	color: white;
+
+table {
+  text-align: left;
+  line-height: 40px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 0px solid #ccf5ff;
+  width: 80%;
+  margin: 10px auto;
+  border-radius: .25rem;
 }
+ 
+thead tr:first-child {
+  background: #ccf5ff;
+  color: black;
+  border: none;
+}
+
+th:first-child,
+td:first-child {
+  padding: 0 15px 0 20px;
+}
+
+thead tr:last-child th {
+  border-bottom: 3px solid #ddd;
+}
+
+
+tbody tr:last-child td {
+  border: none;
+}
+
+tbody td {
+  border-bottom: 0px solid #ddd;
+}
+
+td:last-child {
+  padding-right: 10px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #000000;
+}
+
+
+
+
+

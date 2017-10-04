@@ -12,6 +12,7 @@ public class Constants {
 	 */
 	public static final String FAULT_TABLE_ID_COLUMN = "idFault";
 	public static final String FAULT_TABLE_DATE_TIME_COLUMN = "dateTime";
+	public static final String FAULT_TABLE_LAST_EDIT_COLUMN = "lastEdit";
 	public static final String FAULT_TABLE_SERIAL_NUMBER_COLUMN = "productSerialNumber";
 	public static final String FAULT_TABLE_PRODUCT_ID_COLUMN = "productId";
 	public static final String FAULT_TABLE_PRODUCT_TYPE_COLUMN = "productType";

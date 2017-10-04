@@ -36,7 +36,8 @@ public class FaultDAOImpl implements FaultDAO {
 			//update
 			
 			String sql = "UPDATE " + Constants.FAULT_TABLE_NAME + " SET "
-	        		+ Constants.FAULT_TABLE_SERIAL_NUMBER_COLUMN + "=?, "
+					+ Constants.FAULT_TABLE_LAST_EDIT_COLUMN + "=?, "
+					+ Constants.FAULT_TABLE_SERIAL_NUMBER_COLUMN + "=?, "
 	        		+ Constants.FAULT_TABLE_CLIENT_NAME_COLUMN + "=?, "
 	        		+ Constants.FAULT_TABLE_CLIENT_STREET_COLUMN + "=?, "
 	        		+ Constants.FAULT_TABLE_CLIENT_PLACE_COLUMN + "=?, "
@@ -47,24 +48,27 @@ public class FaultDAOImpl implements FaultDAO {
 	        		+ Constants.FAULT_TABLE_FAULT_NOTE_COLUMN + "=?, "
 	        		+ Constants.FAULT_TABLE_FAULT_ISSUED_TO_COLUMN + "=?, "
 	        		+ Constants.FAULT_TABLE_FAULT_ISSUED_BY_COLUMN + "=?, "
-	        		+ Constants.FAULT_TABLE_FAULT_TYPE_COLUMN + "=? "
+	        		+ Constants.FAULT_TABLE_FAULT_TYPE_COLUMN + "=?, "
+	        		+ Constants.FAULT_TABLE_FAULT_PRIORITY_COLUMN + "=? "
 	        		+ "WHERE " 
 	        		+ Constants.FAULT_TABLE_ID_COLUMN + "=?";
 	        
-			/*jdbcTemplate.update(sql, 
-	        		fault.getIdent(), 
-	        		fault.getSerialNumber(), 
-	        		fault.getClient(), 
-	        		fault.getStreet(), 
-	        		fault.getPlace(), 
-	        		fault.getPhoneOne(), 
-	        		fault.getPhoneTwo(), 
-        			fault.getFaultDescription(), 
-        			fault.getNote(), 
-        			fault.getServiceman(), 
-        			fault.getOrderBy(), 
-        			fault.getTypeOfService(), 
-        			fault.getId());*/
+			jdbcTemplate.update(sql, 
+					fault.getLastEdit(),
+	        		fault.getProductSerialNumber(),
+	        		fault.getClientName(), 
+	        		fault.getClientStreet(), 
+	        		fault.getClientPlace(), 
+	        		fault.getClientPhoneOne(), 
+	        		fault.getClientPhoneTwo(), 
+	        		fault.getClientEmail(), 
+	        		fault.getFaultDescription(), 
+	        		fault.getFaultNote(), 
+	        		fault.getFaultIssuedTo(), 
+	        		fault.getFaultIssuedBy(),
+	        		fault.getFaultType(), 
+	        		fault.getFaultPriority(),
+	        		fault.getIdFault());
 	        
 		}else {
 			//insert
@@ -156,16 +160,20 @@ public class FaultDAOImpl implements FaultDAO {
 					
 					fault.setIdFault(rs.getInt(Constants.FAULT_TABLE_ID_COLUMN));
 		            fault.setDateTime(rs.getDate(Constants.FAULT_TABLE_DATE_TIME_COLUMN));
-		            fault.setProductType(rs.getString(Constants.FAULT_TABLE_PRODUCT_TYPE_COLUMN));
+		            fault.setProductId(rs.getString(Constants.FAULT_TABLE_PRODUCT_ID_COLUMN));
+		            fault.setProductSerialNumber(rs.getString(Constants.FAULT_TABLE_SERIAL_NUMBER_COLUMN));
 		            fault.setClientName(rs.getString(Constants.FAULT_TABLE_CLIENT_NAME_COLUMN));
 		            fault.setClientStreet(rs.getString(Constants.FAULT_TABLE_CLIENT_STREET_COLUMN));
 		            fault.setClientPlace(rs.getString(Constants.FAULT_TABLE_CLIENT_PLACE_COLUMN));
 		            fault.setClientPhoneOne(rs.getString(Constants.FAULT_TABLE_CLIENT_PHONE_ONE_COLUMN));
 		            fault.setClientPhoneTwo(rs.getString(Constants.FAULT_TABLE_CLIENT_PHONE_TWO_COLUMN));
+		            fault.setClientEmail(rs.getString(Constants.FAULT_TABLE_CLIENT_EMAIL_COLUMN));
 		            fault.setFaultDescription(rs.getString(Constants.FAULT_TABLE_FAULT_DESCRIPTION_COLUMN));
 		            fault.setFaultNote(rs.getString(Constants.FAULT_TABLE_FAULT_NOTE_COLUMN));
 		            fault.setFaultIssuedTo(rs.getString(Constants.FAULT_TABLE_FAULT_ISSUED_TO_COLUMN));
-		            fault.setFaultType(Constants.FAULT_TABLE_FAULT_TYPE_COLUMN);
+		            fault.setFaultIssuedBy(rs.getString(Constants.FAULT_TABLE_FAULT_ISSUED_BY_COLUMN));
+		            fault.setFaultType(rs.getString(Constants.FAULT_TABLE_FAULT_TYPE_COLUMN));
+		            fault.setFaultPriority(rs.getString(Constants.FAULT_TABLE_FAULT_PRIORITY_COLUMN));
 					
 		            
 					return fault;

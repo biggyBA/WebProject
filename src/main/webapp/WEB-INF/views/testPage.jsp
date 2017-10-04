@@ -10,52 +10,39 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Test page</title>
-		<style>
-		#errorMessage{
-		color: red;
-		}
-		</style>
+		<style type="text/css">
+div#map_container{
+	width:100%;
+	height:900px;
+}
+</style>
+<script type="text/javascript"
+   src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDiC6WFTBReLHHd7dPBhsBBSKYeezb-zYk"></script>
+
+<script type="text/javascript">
+  function loadMap() {
+    var latlng = new google.maps.LatLng(50.780258, 7.261953);
+    var myOptions = {
+      zoom: 4,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
+
+    var marker = new google.maps.Marker({
+      position: latlng,
+      map: map,
+      title:"my hometown, Malim Nawar!"
+    });
+
+  }
+</script>
 	</head>
 	
 	
-<body>
+<body onload="loadMap()">
 	
-	<div align="center">
-        
-        <table border="0" width="90%">
-        <form:form action="login" commandName="fault">
-                <tr>
-                    <td align="left" width="20%">Email: </td>
-                    <td align="left" width="40%"><form:input path="clientEmail" size="30"/></td>
-                </tr>
-                <tr>
-                	<td width="20%"/>
-                    <td align="left" width="40%" id="errorMessage"><form:errors path="clientEmail" cssClass="error"/></td>
-                </tr>
-                <tr>
-                    <td>Password: </td>
-                    <td><form:password path="faultDescription" size="30"/></td>
-                    <td><form:errors path="faultDescription" cssClass="error"/></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td align="center"><input type="submit" value="Login"/></td>
-                    <td></td>
-                </tr>
-        </form:form>
-        </table>
-        
-        
-    </div>
-	
-	
-	
-	
-	
-	
-	
-		
-		
+	<div id="map_container"></div>
 		
 
 </body>

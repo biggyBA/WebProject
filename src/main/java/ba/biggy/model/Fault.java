@@ -15,6 +15,8 @@ public class Fault {
 	
 	private Date dateTime;
 	
+	private Date lastEdit;
+	
 	@NotEmpty
 	private String productSerialNumber;
 	
@@ -205,6 +207,13 @@ public class Fault {
 		this.faultStatus = faultStatus;
 	}
 	
-	
+	public Date getLastEdit() {
+		return lastEdit;
+	}
+
+	public void setLastEdit(Date lastEdit) {
+		this.lastEdit = lastEdit;
+	}
+
 
 }
