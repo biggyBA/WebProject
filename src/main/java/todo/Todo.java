@@ -17,4 +17,37 @@ public class Todo {
 	//Add LastEdit column to Fault table
 	
 	//Implement lastEdit in editFaultPage
+	
+	//Implement archive option in faultOverview
+	
+	//Implement delete option in faultOverview
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

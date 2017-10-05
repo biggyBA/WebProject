@@ -31,6 +31,7 @@ public class Constants {
 	public static final String FAULT_TABLE_FAULT_STATUS_COLUMN = "faultStatus";
 	
 	public static final String FAULT_TABLE_TO_DO_STATUS = "UrgentToDo";
+	public static final String FAULT_TABLE_DONE_STATUS = "ServiceDone";
 	
 	
 	

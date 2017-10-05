@@ -9,6 +9,13 @@
 	<head>
 		<link href="<c:url value="/resources/css/editFaultPage.css" />" rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<style type="text/css">
+		#errorMessage{
+		color: red;
+		padding-left: 22px;
+		font-size: 0.75em;
+		}
+		</style>
 		<title>Edit fault</title>
 	</head>
 	

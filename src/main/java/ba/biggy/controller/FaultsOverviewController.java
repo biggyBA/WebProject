@@ -59,12 +59,12 @@ public class FaultsOverviewController {
 	}
 	
 	
-	/*@RequestMapping(value = "/archiveFault", method = RequestMethod.GET)
+	@RequestMapping(value = "/archiveFault", method = RequestMethod.GET)
 	public ModelAndView archiveFault (HttpServletRequest request) {
 		int faultId = Integer.parseInt(request.getParameter("id"));
 		faultDAO.archiveFault(faultId);
 		return new ModelAndView ("redirect:/faultsOverview");
-	}*/
+	}
 	
 	
 	/*@RequestMapping(value = "/deleteFault", method = RequestMethod.GET)

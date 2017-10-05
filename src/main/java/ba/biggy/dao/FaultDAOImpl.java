@@ -116,6 +116,9 @@ public class FaultDAOImpl implements FaultDAO {
 	}
 	
 	
+	/**
+	 * Returns a list of faults with a status "UrgentToDo" in the "faultStatus" column
+	 */
 	@Override
 	public List<Fault> listToDoFaults() {
 		String sql = "SELECT * FROM " + Constants.FAULT_TABLE_NAME + " WHERE " + Constants.FAULT_TABLE_FAULT_STATUS_COLUMN + " = '"+ Constants.FAULT_TABLE_TO_DO_STATUS +"'";
@@ -148,6 +151,9 @@ public class FaultDAOImpl implements FaultDAO {
 	}
 
 
+	/**
+	 * Returns a fault object with a specific id
+	 */
 	@Override
 	public Fault getFaultById(int faultId) {
 		String sql = "SELECT * FROM " + Constants.FAULT_TABLE_NAME + " WHERE " + Constants.FAULT_TABLE_ID_COLUMN + "=" + faultId;
@@ -184,4 +190,40 @@ public class FaultDAOImpl implements FaultDAO {
 		});
 	}
 
+
+	/**
+	 * Sets a fault status in "faultStatus" column from "UrgentToDo" to "ServiceDone"
+	 */
+	@Override
+	public void archiveFault(int faultId) {
+		String sql = "UPDATE " + Constants.FAULT_TABLE_NAME + " SET " + Constants.FAULT_TABLE_FAULT_STATUS_COLUMN + "=? WHERE " + Constants.FAULT_TABLE_ID_COLUMN + "=?";
+        jdbcTemplate.update(sql, Constants.FAULT_TABLE_DONE_STATUS, faultId);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

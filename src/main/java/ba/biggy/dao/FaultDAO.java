@@ -11,4 +11,6 @@ public interface FaultDAO {
 	public List<Fault> listToDoFaults();
 	
 	public Fault getFaultById (int faultId);
+	
+	public void archiveFault (int faultId);
 }
