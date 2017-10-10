@@ -14,37 +14,20 @@ table {
   border-radius: .25rem;
 }
 
-thead tr:first-child {
-  background: #ccf5ff;
-  color: black;
-  border: none;
-}
 
-th:first-child,
-td:first-child {
-  padding: 0 15px 0 20px;
-}
-
-thead tr:last-child th {
-  border-bottom: 3px solid #ddd;
-}
 
 tbody tr:hover {
   background-color: #f2f2f2;
   cursor: default;
 }
 
-tbody tr:last-child td {
-  border: none;
-}
+
 
 tbody td {
   border-bottom: 1px solid #ddd;
 }
 
-td:last-child {
-  padding-right: 10px;
-}
+
 
 .button {
   color: #aaa;
@@ -60,6 +43,4 @@ td:last-child {
 .delete:hover {
   color: #dc2a2a;
 }
-  
-
   

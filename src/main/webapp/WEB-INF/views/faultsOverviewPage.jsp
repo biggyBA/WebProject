@@ -12,7 +12,7 @@
   		<style>
 			  /* Popover */
 			  .popover {
-			      border: 2px dotted red;
+			      border: 2px black;
 			  }
 			  /* Popover Header */
 			  .popover-title {
@@ -23,9 +23,9 @@
 			  }
 			  /* Popover Body */
 			  .popover-content {
-			      background-color: coral;
-			      color: #FFFFFF;
-			      padding: 25px;
+			      background-color: #f2f2f2;
+			      color: black;
+			      padding: 15px;
 			  }
 			  /* Popover Arrow */
 			  .arrow {
@@ -74,6 +74,7 @@
             <table id="table-fill">
 	            <thead>
 	            	<tr class="header">
+	            		<th>
 		                <th width="60px">Date</th>
 		                <th width="70px">Time</th>
 		                <th width="110px">Product type</th>
@@ -92,6 +93,7 @@
 	             <tbody>
 	                <c:forEach var="fault" items="${toDoFaults}" varStatus="status">	
 		                <tr>
+		                	<td style="display:none;">${fault.idFault}</td>
 		                	<td class="mytable tr"><fmt:formatDate value="${fault.dateTime}" pattern="dd.MM.yyyy" /></td>
 		                	<td><fmt:formatDate value="${fault.dateTime}" pattern="HH:mm:ss" /></td>
 		                    <td>${fault.productType}</td>
@@ -106,7 +108,7 @@
 		                    <td>${fault.faultType}</td> 
 		                    <td><a href="${pageContext.request.contextPath}/editFault?id=${fault.idFault}">Edit</a></td>
 		                    <td><a href="${pageContext.request.contextPath}/archiveFault?id=${fault.idFault}">Archive</a></td>
-		                    <td><a href="#" data-toggle="popover" data-trigger="focus">Delete</a></td>      
+		                    <td><a href="${pageContext.request.contextPath}/deleteFault?id=${fault.idFault}">Delete</a></td>      
 		                </tr>
 	                </c:forEach>
                  </tbody>     
@@ -115,18 +117,27 @@
 
 
 
-
 <script>
+
 $(document).ready(function(){
 
+	$("#table-fill").on('click','.btnSelect',function(){
+        // get the current row
+        var currentRow=$(this).closest("tr"); 
+        
+        var rowId=currentRow.find("td:eq(0)").text(); 
+        return rowId
+        //alert(rowId);
+   });
+
+
 	
 	
-    $('[data-toggle="popover"]').popover({
+    $('[data-toggle="popoverDelete"]').popover({
     	placement: 'left',
     	html: true,
         content: function() {
-        	
-      	return "fadf"
+        	return $('#deleteFaultPopover').html();
     	}
 
     }); 

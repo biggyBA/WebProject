@@ -1,6 +1,6 @@
 package ba.biggy.controller;
 
-import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +59,7 @@ public class FaultsOverviewController {
 	}
 	
 	
-	@RequestMapping(value = "/archiveFault", method = RequestMethod.GET)
+	@RequestMapping(value = "/archiveFault")
 	public ModelAndView archiveFault (HttpServletRequest request) {
 		int faultId = Integer.parseInt(request.getParameter("id"));
 		faultDAO.archiveFault(faultId);
@@ -67,12 +67,12 @@ public class FaultsOverviewController {
 	}
 	
 	
-	/*@RequestMapping(value = "/deleteFault", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteFault")
 	public ModelAndView deleteFault(HttpServletRequest request) {
 	    int faultId = Integer.parseInt(request.getParameter("id"));
-	    faultDAO.delete(faultId);
+	    faultDAO.deleteFault(faultId);
 	    return new ModelAndView("redirect:/faultsOverview");
-	}*/
+	}
 	
 	
 	/*

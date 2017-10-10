@@ -200,6 +200,16 @@ public class FaultDAOImpl implements FaultDAO {
         jdbcTemplate.update(sql, Constants.FAULT_TABLE_DONE_STATUS, faultId);
 	}
 
+
+	/**
+	 * Deletes a fault with a specified id
+	 */
+	@Override
+	public void deleteFault(int faultId) {
+		String sql = "DELETE FROM " + Constants.FAULT_TABLE_NAME + " WHERE " + Constants.FAULT_TABLE_ID_COLUMN + "=?";
+	    jdbcTemplate.update(sql, faultId);
+	}
+
 	
 	
 	
