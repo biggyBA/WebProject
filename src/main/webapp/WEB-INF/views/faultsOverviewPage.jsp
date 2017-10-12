@@ -115,6 +115,7 @@
             </table>
 	</div> <!-- close tableHolder -->
 
+<p>${googleResponse}</p>
 
 
 <script>

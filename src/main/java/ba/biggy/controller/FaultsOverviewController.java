@@ -14,10 +14,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import ba.biggy.dao.FaultDAO;
+import ba.biggy.global.Constants;
 import ba.biggy.model.Fault;
+import ba.biggy.model.GeocodingResponse;
+import ba.biggy.model.Geometry;
+import ba.biggy.model.Location;
+import ba.biggy.model.Result;
 
 @Controller
 public class FaultsOverviewController {
@@ -27,8 +33,29 @@ public class FaultsOverviewController {
 	
 	@RequestMapping (value = "/faultsOverview")
 	public ModelAndView showToDoFaults (ModelAndView model) {
+		/*
+		 * Get a list of to do faults from MySQL table
+		 */
 		List<Fault> toDoFaults = faultDAO.listToDoFaults();
 		model.addObject("toDoFaults", toDoFaults);
+		
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyDiC6WFTBReLHHd7dPBhsBBSKYeezb-zYk";
+		GeocodingResponse gResp = restTemplate.getForObject(url, GeocodingResponse.class);
+		
+		List<Result> results = gResp.getResults();
+		Result result = results.get(0);
+		Geometry geometry = result.getGeometry();
+		Location location = geometry.getLocation();
+		Double lat = location.getLat();
+		String latString = String.valueOf(lat);
+		
+		
+		model.addObject("googleResponse", latString);
+		
+		
+		
 		model.setViewName("faultsOverviewPage");
 		return model;
 	}
@@ -72,6 +99,15 @@ public class FaultsOverviewController {
 	    int faultId = Integer.parseInt(request.getParameter("id"));
 	    faultDAO.deleteFault(faultId);
 	    return new ModelAndView("redirect:/faultsOverview");
+	}
+	
+	
+	@RequestMapping (value = "/faultsOverviewMap")
+	public ModelAndView showToDoFaultsOnMap (ModelAndView model) {
+		List<Fault> toDoFaults = faultDAO.listToDoFaults();
+		model.addObject("toDoFaults", toDoFaults);
+		model.setViewName("mapFaultsOverviewPage");
+		return model;
 	}
 	
 	

@@ -63,6 +63,7 @@ body {
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="${pageContext.request.contextPath}/submitFault">Submit fault</a>
   <a href="${pageContext.request.contextPath}/faultsOverview">Faults overview</a>
+  <a href="${pageContext.request.contextPath}/faultsOverviewMap">Map faults overview</a>
   <a href="${pageContext.request.contextPath}/test">Test</a>
 </div>
 
@@ -70,7 +71,7 @@ body {
 
 <script>
 function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.width = "300px";
 }
 
 function closeNav() {
