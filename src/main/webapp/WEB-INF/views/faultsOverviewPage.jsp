@@ -115,7 +115,8 @@
             </table>
 	</div> <!-- close tableHolder -->
 
-<p>${googleResponse}</p>
+<p>Lat ${location.lat}</p>
+<p>Lng ${location.lng}</p>
 
 
 <script>

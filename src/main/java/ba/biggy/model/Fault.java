@@ -31,6 +31,8 @@ public class Fault {
 	@NotEmpty
 	private String clientStreet;
 	
+	private String clientPostalCode;
+	
 	@NotEmpty
 	private String clientPlace;
 	
@@ -214,6 +216,17 @@ public class Fault {
 	public void setLastEdit(Date lastEdit) {
 		this.lastEdit = lastEdit;
 	}
+
+	public String getClientPostalCode() {
+		return clientPostalCode;
+	}
+
+	public void setClientPostalCode(String clientPostalCode) {
+		this.clientPostalCode = clientPostalCode;
+	}
+
+	
+	
 
 
 }

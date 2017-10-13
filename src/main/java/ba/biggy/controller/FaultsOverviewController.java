@@ -19,11 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ba.biggy.dao.FaultDAO;
 import ba.biggy.global.Constants;
+import ba.biggy.global.Geocoding;
 import ba.biggy.model.Fault;
-import ba.biggy.model.GeocodingResponse;
-import ba.biggy.model.Geometry;
-import ba.biggy.model.Location;
-import ba.biggy.model.Result;
+import ba.biggy.model.geocoding.GeocodingResponse;
+import ba.biggy.model.geocoding.Geometry;
+import ba.biggy.model.geocoding.Location;
+import ba.biggy.model.geocoding.Result;
 
 @Controller
 public class FaultsOverviewController {
@@ -40,19 +41,17 @@ public class FaultsOverviewController {
 		model.addObject("toDoFaults", toDoFaults);
 		
 		
-		RestTemplate restTemplate = new RestTemplate();
-		String url = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyDiC6WFTBReLHHd7dPBhsBBSKYeezb-zYk";
-		GeocodingResponse gResp = restTemplate.getForObject(url, GeocodingResponse.class);
 		
-		List<Result> results = gResp.getResults();
-		Result result = results.get(0);
-		Geometry geometry = result.getGeometry();
-		Location location = geometry.getLocation();
-		Double lat = location.getLat();
-		String latString = String.valueOf(lat);
+		Geocoding geocoding = new Geocoding();
+		
+		//String latString = String.valueOf(geocoding.getLat("Grapska", "grapska"));
+		
+		Location location = geocoding.getLatLng("Grapska", "grapska");
+		//String latString = geocoding.getLat("Tuzla", "slavinovic");
 		
 		
-		model.addObject("googleResponse", latString);
+		model.addObject("location", location);
+		
 		
 		
 		

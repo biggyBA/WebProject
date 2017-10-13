@@ -1,4 +1,4 @@
-package ba.biggy.model;
+package ba.biggy.model.geocoding;
 
 import java.util.List;
 

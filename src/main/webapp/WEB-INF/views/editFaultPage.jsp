@@ -91,6 +91,13 @@
 					        	<td id="errorMessage"><form:errors path="clientStreet"/></td>
 					        	</tr>
 					        	
+					        	<!-- Postal code -->
+								<tr>
+									<td><spring:message code="label.clientPostalCode"/></td>
+									<td>
+										<form:input path="clientPostalCode" type="text" placeholder="Postal code"/>
+									</td>
+								</tr>
 								
 								<!-- Client place -->
 								<tr>

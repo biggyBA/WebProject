@@ -40,6 +40,7 @@ public class FaultDAOImpl implements FaultDAO {
 					+ Constants.FAULT_TABLE_SERIAL_NUMBER_COLUMN + "=?, "
 	        		+ Constants.FAULT_TABLE_CLIENT_NAME_COLUMN + "=?, "
 	        		+ Constants.FAULT_TABLE_CLIENT_STREET_COLUMN + "=?, "
+	        		+ Constants.FAULT_TABLE_CLIENT_POSTAL_CODE + "=?, "
 	        		+ Constants.FAULT_TABLE_CLIENT_PLACE_COLUMN + "=?, "
 	        		+ Constants.FAULT_TABLE_CLIENT_PHONE_ONE_COLUMN + "=?, "
 	        		+ Constants.FAULT_TABLE_CLIENT_PHONE_TWO_COLUMN + "=?, "
@@ -58,6 +59,7 @@ public class FaultDAOImpl implements FaultDAO {
 	        		fault.getProductSerialNumber(),
 	        		fault.getClientName(), 
 	        		fault.getClientStreet(), 
+	        		fault.getClientPostalCode(),
 	        		fault.getClientPlace(), 
 	        		fault.getClientPhoneOne(), 
 	        		fault.getClientPhoneTwo(), 
@@ -80,6 +82,7 @@ public class FaultDAOImpl implements FaultDAO {
 	        		+ Constants.FAULT_TABLE_PRODUCT_TYPE_COLUMN + ", "
 	        		+ Constants.FAULT_TABLE_CLIENT_NAME_COLUMN + ", "
 	        		+ Constants.FAULT_TABLE_CLIENT_STREET_COLUMN + ", "
+	        		+ Constants.FAULT_TABLE_CLIENT_POSTAL_CODE + ", "
 	        		+ Constants.FAULT_TABLE_CLIENT_PLACE_COLUMN + ", "
 	        		+ Constants.FAULT_TABLE_CLIENT_PHONE_ONE_COLUMN + ", "
 	        		+ Constants.FAULT_TABLE_CLIENT_PHONE_TWO_COLUMN + ", "
@@ -91,7 +94,7 @@ public class FaultDAOImpl implements FaultDAO {
 	        		+ Constants.FAULT_TABLE_FAULT_TYPE_COLUMN + ", "
 	        		+ Constants.FAULT_TABLE_FAULT_PRIORITY_COLUMN + ", "
 	        		+ Constants.FAULT_TABLE_FAULT_STATUS_COLUMN + ")"
-	                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	        
 			jdbcTemplate.update(sql,
 	        		fault.getDateTime(),
@@ -100,6 +103,7 @@ public class FaultDAOImpl implements FaultDAO {
 	        		fault.getProductType(), 
 	        		fault.getClientName(), 
 	        		fault.getClientStreet(), 
+	        		fault.getClientPostalCode(),
 	        		fault.getClientPlace(), 
 	        		fault.getClientPhoneOne(), 
 	        		fault.getClientPhoneTwo(), 
@@ -133,6 +137,7 @@ public class FaultDAOImpl implements FaultDAO {
 	            faults.setProductType(rs.getString(Constants.FAULT_TABLE_PRODUCT_TYPE_COLUMN));
 	            faults.setClientName(rs.getString(Constants.FAULT_TABLE_CLIENT_NAME_COLUMN));
 	            faults.setClientStreet(rs.getString(Constants.FAULT_TABLE_CLIENT_STREET_COLUMN));
+	            faults.setClientPostalCode(rs.getString(Constants.FAULT_TABLE_CLIENT_POSTAL_CODE));
 	            faults.setClientPlace(rs.getString(Constants.FAULT_TABLE_CLIENT_PLACE_COLUMN));
 	            faults.setClientPhoneOne(rs.getString(Constants.FAULT_TABLE_CLIENT_PHONE_ONE_COLUMN));
 	            faults.setClientPhoneTwo(rs.getString(Constants.FAULT_TABLE_CLIENT_PHONE_TWO_COLUMN));
@@ -170,6 +175,7 @@ public class FaultDAOImpl implements FaultDAO {
 		            fault.setProductSerialNumber(rs.getString(Constants.FAULT_TABLE_SERIAL_NUMBER_COLUMN));
 		            fault.setClientName(rs.getString(Constants.FAULT_TABLE_CLIENT_NAME_COLUMN));
 		            fault.setClientStreet(rs.getString(Constants.FAULT_TABLE_CLIENT_STREET_COLUMN));
+		            fault.setClientPostalCode(rs.getString(Constants.FAULT_TABLE_CLIENT_POSTAL_CODE));
 		            fault.setClientPlace(rs.getString(Constants.FAULT_TABLE_CLIENT_PLACE_COLUMN));
 		            fault.setClientPhoneOne(rs.getString(Constants.FAULT_TABLE_CLIENT_PHONE_ONE_COLUMN));
 		            fault.setClientPhoneTwo(rs.getString(Constants.FAULT_TABLE_CLIENT_PHONE_TWO_COLUMN));

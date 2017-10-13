@@ -34,6 +34,8 @@ public class SubmitFaultController {
 	    return model;
 	}
 	
+	
+	//TODO insert geocoding
 	@RequestMapping(value = "/submitFault", method = RequestMethod.POST)
 	public ModelAndView saveFault(@Valid @ModelAttribute Fault fault, 
 			BindingResult result, ModelAndView model) {

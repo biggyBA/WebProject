@@ -1,10 +1,19 @@
-package ba.biggy.model;
+package ba.biggy.model.geocoding;
 
 public class Location {
 	
 	public Double lat;
 	public Double lng;
 	
+	
+	public Location () {
+		
+	}
+	
+	public Location (Double lat, Double lng) {
+		this.lat = lat;
+		this.lng = lng;
+	}
 	
 	public Double getLat() {
 		return lat;

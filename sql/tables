@@ -24,3 +24,6 @@ COLLATE = utf8_general_ci;
 
 ALTER TABLE `webprojectdb`.`fault` 
 ADD COLUMN `lastEdit` DATETIME NULL DEFAULT NULL AFTER `dateTime`;
+
+ALTER TABLE `webprojectdb`.`fault` 
+ADD COLUMN `clientPostalCode` VARCHAR(45) NULL AFTER `clientStreet`;

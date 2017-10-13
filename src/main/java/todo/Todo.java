@@ -22,7 +22,7 @@ public class Todo {
 	
 	//Implement delete option in faultOverview
 	
-	
+	//Add postal code to submitFault and MySQL
 	
 	
 	
