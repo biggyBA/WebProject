@@ -27,3 +27,7 @@ ADD COLUMN `lastEdit` DATETIME NULL DEFAULT NULL AFTER `dateTime`;
 
 ALTER TABLE `webprojectdb`.`fault` 
 ADD COLUMN `clientPostalCode` VARCHAR(45) NULL AFTER `clientStreet`;
+
+ALTER TABLE `webprojectdb`.`fault` 
+ADD COLUMN `faultLat` DOUBLE NULL AFTER `faultStatus`,
+ADD COLUMN `faultLng` DOUBLE NULL AFTER `faultLat`;

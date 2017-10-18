@@ -32,6 +32,26 @@
 			      border-right-color: red !important;
 			  }
 		  </style>
+		  
+		  <style type="text/css">
+			#wrapper {
+	    		display: none;
+			}
+			
+			#loading {
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 100;
+				width: 100vw;
+				height: 100vh;
+				background-color: rgba(192, 192, 192, 0.5);
+				background-image: url("http://i.stack.imgur.com/MnyxU.gif");
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+		</style>
   		
 		<link href="<c:url value="/resources/css/faultsOverviewTable.css" />" rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -58,11 +78,35 @@
 			  }
 			}
 		</script>
+		
+		<script type="text/javascript">
+			function onReady(callback) {
+			    var intervalID = window.setInterval(checkReady, 1000);
+			
+			function checkReady() {
+			    if (document.getElementsByTagName('body')[0] !== undefined) {
+			            window.clearInterval(intervalID);
+			            callback.call(this);
+			        }
+			    }
+			}
+			
+			function show(id, value) {
+			    document.getElementById(id).style.display = value ? 'block' : 'none';
+			}
+			
+			onReady(function () {
+			    show('wrapper', true);
+			    show('loading', false);
+			});
+		</script>
 	</head>
 	
 <body>
 
 	<jsp:include page="navigationDrawer.jsp"/>
+	
+	<div id="wrapper">
 
 	<div id="top">
 		<div id="search"><input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Find by fault description..."></div>
@@ -114,9 +158,10 @@
                  </tbody>     
             </table>
 	</div> <!-- close tableHolder -->
+	
+	</div>
 
-<p>Lat ${location.lat}</p>
-<p>Lng ${location.lng}</p>
+<div id="loading"></div>
 
 
 <script>

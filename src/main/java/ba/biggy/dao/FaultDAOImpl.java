@@ -93,8 +93,10 @@ public class FaultDAOImpl implements FaultDAO {
 	        		+ Constants.FAULT_TABLE_FAULT_ISSUED_BY_COLUMN + ", "
 	        		+ Constants.FAULT_TABLE_FAULT_TYPE_COLUMN + ", "
 	        		+ Constants.FAULT_TABLE_FAULT_PRIORITY_COLUMN + ", "
-	        		+ Constants.FAULT_TABLE_FAULT_STATUS_COLUMN + ")"
-	                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	        		+ Constants.FAULT_TABLE_FAULT_STATUS_COLUMN + ", "
+	        		+ Constants.FAULT_TABLE_FAULT_FAULT_LAT + ", "
+	        		+ Constants.FAULT_TABLE_FAULT_FAULT_LNG + ")"
+	                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	        
 			jdbcTemplate.update(sql,
 	        		fault.getDateTime(),
@@ -114,7 +116,9 @@ public class FaultDAOImpl implements FaultDAO {
 	        		fault.getFaultIssuedBy(),
 	        		fault.getFaultType(), 
 	        		fault.getFaultPriority(),
-	        		fault.getFaultStatus());
+	        		fault.getFaultStatus(),
+	        		fault.getFaultLat(),
+	        		fault.getFaultLng());
 		}
 		
 	}
@@ -144,7 +148,10 @@ public class FaultDAOImpl implements FaultDAO {
 	            faults.setFaultDescription(rs.getString(Constants.FAULT_TABLE_FAULT_DESCRIPTION_COLUMN));
 	            faults.setFaultNote(rs.getString(Constants.FAULT_TABLE_FAULT_NOTE_COLUMN));
 	            faults.setFaultIssuedTo(rs.getString(Constants.FAULT_TABLE_FAULT_ISSUED_TO_COLUMN));
-	            faults.setFaultType(Constants.FAULT_TABLE_FAULT_TYPE_COLUMN);
+	            faults.setFaultType(rs.getString(Constants.FAULT_TABLE_FAULT_TYPE_COLUMN));
+	            faults.setFaultPriority(rs.getString(Constants.FAULT_TABLE_FAULT_PRIORITY_COLUMN));
+	            faults.setFaultLat(rs.getDouble(Constants.FAULT_TABLE_FAULT_FAULT_LAT));
+	            faults.setFaultLng(rs.getDouble(Constants.FAULT_TABLE_FAULT_FAULT_LNG));
 	     
 	            return faults;
 	        }
@@ -186,6 +193,8 @@ public class FaultDAOImpl implements FaultDAO {
 		            fault.setFaultIssuedBy(rs.getString(Constants.FAULT_TABLE_FAULT_ISSUED_BY_COLUMN));
 		            fault.setFaultType(rs.getString(Constants.FAULT_TABLE_FAULT_TYPE_COLUMN));
 		            fault.setFaultPriority(rs.getString(Constants.FAULT_TABLE_FAULT_PRIORITY_COLUMN));
+		            fault.setFaultLat(rs.getDouble(Constants.FAULT_TABLE_FAULT_FAULT_LAT));
+		            fault.setFaultLng(rs.getDouble(Constants.FAULT_TABLE_FAULT_FAULT_LNG));
 					
 		            
 					return fault;

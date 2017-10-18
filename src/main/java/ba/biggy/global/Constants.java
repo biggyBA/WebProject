@@ -36,6 +36,8 @@ public class Constants {
 	public static final String FAULT_TABLE_FAULT_TYPE_COLUMN = "faultType";
 	public static final String FAULT_TABLE_FAULT_PRIORITY_COLUMN = "faultPriority";
 	public static final String FAULT_TABLE_FAULT_STATUS_COLUMN = "faultStatus";
+	public static final String FAULT_TABLE_FAULT_FAULT_LAT = "faultLat";
+	public static final String FAULT_TABLE_FAULT_FAULT_LNG = "faultLng";
 	
 	//Possible fault status
 	public static final String FAULT_TABLE_TO_DO_STATUS = "UrgentToDo";

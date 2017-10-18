@@ -65,6 +65,11 @@ public class Fault {
 	
 	private String faultStatus;
 	
+	private double faultLat;
+	
+	private double faultLng;
+	
+	
 	public int getIdFault() {
 		return idFault;
 	}
@@ -223,6 +228,22 @@ public class Fault {
 
 	public void setClientPostalCode(String clientPostalCode) {
 		this.clientPostalCode = clientPostalCode;
+	}
+
+	public double getFaultLat() {
+		return faultLat;
+	}
+
+	public void setFaultLat(double faultLat) {
+		this.faultLat = faultLat;
+	}
+
+	public double getFaultLng() {
+		return faultLng;
+	}
+
+	public void setFaultLng(double faultLng) {
+		this.faultLng = faultLng;
 	}
 
 	

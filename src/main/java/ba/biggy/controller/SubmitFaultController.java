@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ba.biggy.dao.FaultDAO;
+import ba.biggy.global.Geocoding;
 import ba.biggy.model.Fault;
+import ba.biggy.model.geocoding.Location;
 
 
 
@@ -35,17 +38,35 @@ public class SubmitFaultController {
 	}
 	
 	
-	//TODO insert geocoding
+	
 	@RequestMapping(value = "/submitFault", method = RequestMethod.POST)
 	public ModelAndView saveFault(@Valid @ModelAttribute Fault fault, 
-			BindingResult result, ModelAndView model) {
+			BindingResult result, ModelAndView model, HttpServletRequest request) {
 		
+		//Return same page if it has errors
 		if (result.hasErrors()) {
 			model.setViewName("submitFaultPage");
 			return model;
 		}
 		
+		//Otherwise get the address strings
+		String street = request.getParameter("clientStreet");
+		String postalCode = request.getParameter("clientPostalCode");
+		String city = request.getParameter("clientPlace");
+		
+		//And receive lat and lng coordinates from Google
+		Geocoding geocoding = new Geocoding();
+		Location location = geocoding.getLatLng(street, postalCode, city);
+		if (location != null) {
+			double lat = location.getLat();
+			double lng = location.getLng();
+			fault.setFaultLat(lat);
+			fault.setFaultLng(lng);
+		}
+		
+		//Save the fault to MySQL
 		faultDAO.saveOrUpdate(fault);
+		
 		model.setViewName("redirect:/faultsOverview");
 	    return model;
 	}

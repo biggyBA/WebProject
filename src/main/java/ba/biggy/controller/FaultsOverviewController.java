@@ -14,17 +14,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import ba.biggy.dao.FaultDAO;
-import ba.biggy.global.Constants;
-import ba.biggy.global.Geocoding;
 import ba.biggy.model.Fault;
-import ba.biggy.model.geocoding.GeocodingResponse;
-import ba.biggy.model.geocoding.Geometry;
-import ba.biggy.model.geocoding.Location;
-import ba.biggy.model.geocoding.Result;
 
 @Controller
 public class FaultsOverviewController {
@@ -39,22 +32,6 @@ public class FaultsOverviewController {
 		 */
 		List<Fault> toDoFaults = faultDAO.listToDoFaults();
 		model.addObject("toDoFaults", toDoFaults);
-		
-		
-		
-		Geocoding geocoding = new Geocoding();
-		
-		//String latString = String.valueOf(geocoding.getLat("Grapska", "grapska"));
-		
-		Location location = geocoding.getLatLng("Grapska", "grapska");
-		//String latString = geocoding.getLat("Tuzla", "slavinovic");
-		
-		
-		model.addObject("location", location);
-		
-		
-		
-		
 		model.setViewName("faultsOverviewPage");
 		return model;
 	}

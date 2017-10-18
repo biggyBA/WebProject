@@ -8,18 +8,42 @@
 	<head>
 		<link href="<c:url value="/resources/css/submitFaultPage.css" />" rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		
 		<style type="text/css">
 		#errorMessage{
-		color: red;
-		padding-left: 22px;
-		font-size: 0.75em;
+			color: red;
+			padding-left: 22px;
+			font-size: 0.75em;
+		}
+		
+		#loading{
+			display: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 100;
+			width: 100vw;
+			height: 100vh;
+			background-color: rgba(192, 192, 192, 0.5);
+			background-image: url("http://i.stack.imgur.com/MnyxU.gif");
+			background-repeat: no-repeat;
+			background-position: center;
 		}
 		</style>
+		
 		<script>
 		function myFunction() {
 		    alert("Function is not implemented");
 		}
+
+		function showLoader(){
+			var wrapper = document.getElementById("wrapper");
+			var loader = document.getElementById("loading");
+			loader.style.display = "block";
+			wrapper.style.display = "none";
+		}
 		</script>
+		
 		<title>Submit fault</title>
 	</head>
 	
@@ -231,7 +255,7 @@
 		            		 	
 							</table>
 						
-							<input type="submit" value=<spring:message code="label.submitButton"/> id="submitBtn"/>
+							<input type="submit" value=<spring:message code="label.submitButton"/> id="submitBtn" onclick="showLoader()"/>
 						
 						</form:form>
 			
@@ -395,10 +419,11 @@
 		</div> <!-- wrapper end -->
 
 
-
+<div id="loading"></div>
 
 
 </body>
+
 
 
 
