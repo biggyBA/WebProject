@@ -32,6 +32,13 @@ public class FaultsOverviewController {
 		 */
 		List<Fault> toDoFaults = faultDAO.listToDoFaults();
 		model.addObject("toDoFaults", toDoFaults);
+		
+		/*
+		 * Get a count of to do faults
+		 */
+		int faultCount = faultDAO.toDoFaultCount();
+		model.addObject("faultCount", faultCount);
+		
 		model.setViewName("faultsOverviewPage");
 		return model;
 	}

@@ -9,6 +9,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  		<link href="<c:url value="/resources/css/faultsOverviewTable.css" />" rel="stylesheet">
   		<style>
 			  /* Popover */
 			  .popover {
@@ -51,9 +52,27 @@
 				background-repeat: no-repeat;
 				background-position: center;
 			}
+			#faultCount{
+			    color:#D5DDE5;
+			    font-size:18px;
+			    float: right;
+			    width: 9%;
+			    padding-top: 10px;
+			}
+			
+			#search{
+			    width: 50%;
+			    float: left;
+			}
+			
+			#top{
+			    width: 100%;
+			    display: inline-block;
+			    padding-top: 10px;
+			}
 		</style>
   		
-		<link href="<c:url value="/resources/css/faultsOverviewTable.css" />" rel="stylesheet">
+		
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Faults overview</title>
 		<script>

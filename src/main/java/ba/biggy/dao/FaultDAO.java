@@ -15,4 +15,6 @@ public interface FaultDAO {
 	public void archiveFault (int faultId);
 	
 	public void deleteFault (int faultId);
+	
+	public int toDoFaultCount();
 }
