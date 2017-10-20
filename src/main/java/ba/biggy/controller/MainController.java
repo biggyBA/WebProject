@@ -33,7 +33,7 @@ public class MainController {
 	public ModelAndView showTest (ModelAndView model) throws IOException{
 		Fault fault = new Fault();
 		model.addObject("fault", fault);
-		model.setViewName("testPage");
+		model.setViewName("checkTomcat");
 	
 		return model;
 	}

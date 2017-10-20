@@ -8,31 +8,62 @@
 		<title>Map faults overview</title>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDiC6WFTBReLHHd7dPBhsBBSKYeezb-zYk"></script>
 		<script type="text/javascript">
-			  function loadMap() {
-			    var latlng = new google.maps.LatLng(37.4224764, -122.0842499);
-			    var myOptions = {
-			      zoom: 15,
-			      center: latlng,
-			      mapTypeId: google.maps.MapTypeId.ROADMAP
-			    };
-			    var map = new google.maps.Map(document.getElementById("map_container"),myOptions);
-			
-			    var marker = new google.maps.Marker({
-			      position: latlng,
-			      map: map,
-			      title:"my hometown, Malim Nawar!"
-			    });
 
-			    google.maps.event.addListener(marker , 'click', function(){
-			        var infowindow = new google.maps.InfoWindow({
-			          content:'Hello Title',
-			          position: latlng,
-			        });
-			        infowindow.open(map);
-			    });
-			
+			  function loadMap() {
+
+					//get the string from model
+					var faultList = '${faultList}';
+					
+					//convert string to JSON
+					var faultListJSON = JSON.parse(faultList);
+
+					
+				    var map = new google.maps.Map(document.getElementById('map_container'), {
+				      zoom: 10,
+				      center: new google.maps.LatLng(50, 7),
+				      mapTypeId: google.maps.MapTypeId.ROADMAP
+				    });
+
+					var infowindow = new google.maps.InfoWindow();
+
+
+					
+					var marker, i;
+						faultListJSON.forEach( function (arrayItem)
+								{
+						    var lat = arrayItem.faultLat;
+						    var lng = arrayItem.faultLng;
+
+
+						    marker = new google.maps.Marker({
+						        position: new google.maps.LatLng(lat, lng),
+						        map: map
+						      });
+
+
+						   
+						    //alert(lng);
+						    });
+
+
+
+/*
+						google.maps.event.addListener(marker, 'click', (function(marker, i) {
+					        return function() {
+					          infowindow.setContent(locations[i][0]);
+					          infowindow.open(map, marker);
+					        }
+					      })(marker, i));
+
+*/
+
+					    
+						
+
 			  }
+
 		</script>
+		
 		<style type="text/css">
 			div#map_container{
 				width:100%;
@@ -42,9 +73,10 @@
 	</head>
 
 <body onload="loadMap()">
-
+	<jsp:include page="navigationDrawer.jsp"></jsp:include>
 
 	<div id="map_container"></div>
+	<button onClick="mapCoordinates()">Try me</button>
 
 </body>
 </html>

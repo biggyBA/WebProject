@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import ba.biggy.dao.FaultDAO;
 import ba.biggy.model.Fault;
+import ba.biggy.model.geocoding.Location;
 
 @Controller
 public class FaultsOverviewController {
@@ -54,6 +58,7 @@ public class FaultsOverviewController {
 	}
 	
 	
+	
 	@RequestMapping(value = "/editFault", method = RequestMethod.POST)
 	public ModelAndView updateFault(@Valid @ModelAttribute Fault fault, 
 			BindingResult result, ModelAndView model) {
@@ -86,12 +91,30 @@ public class FaultsOverviewController {
 	
 	
 	@RequestMapping (value = "/faultsOverviewMap")
-	public ModelAndView showToDoFaultsOnMap (ModelAndView model) {
+	public ModelAndView showToDoFaultsOnMap (ModelAndView model) throws JsonProcessingException {
 		List<Fault> toDoFaults = faultDAO.listToDoFaults();
 		model.addObject("toDoFaults", toDoFaults);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		model.addObject("faultList", objectMapper.writeValueAsString(toDoFaults));
+		
 		model.setViewName("mapFaultsOverviewPage");
 		return model;
 	}
+	
+	
+	
+	@RequestMapping(value = "/viewFaultDetails", method = RequestMethod.GET)
+	public ModelAndView viewFaultDetails(HttpServletRequest request, ModelAndView model) throws JsonProcessingException {
+		int faultId = Integer.parseInt(request.getParameter("id"));
+		Fault fault = faultDAO.getFaultById(faultId);
+		ObjectMapper objectMapper = new ObjectMapper();
+		model.addObject("faultDetails", objectMapper.writeValueAsString(fault));
+		
+		model.setViewName("faultDetailsMapPage");
+		return model;
+	}
+	
 	
 	
 	/*

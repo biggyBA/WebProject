@@ -96,6 +96,16 @@
 			    } 
 			  }
 			}
+
+			
+			
+			function getAlert(){
+				var bpmnJsonString = '${obj}';
+				var bpmn = JSON.parse(bpmnJsonString);
+				var bpmnXML = bpmn.lng;
+				alert(bpmnXML)
+
+			}
 		</script>
 		
 		<script type="text/javascript">
@@ -137,7 +147,6 @@
             <table id="table-fill">
 	            <thead>
 	            	<tr class="header">
-	            		<th>
 		                <th width="60px">Date</th>
 		                <th width="70px">Time</th>
 		                <th width="110px">Product type</th>
@@ -169,6 +178,7 @@
 		                    <td>${fault.faultNote}</td> 
 		                    <td>${fault.faultIssuedTo}</td>
 		                    <td>${fault.faultType}</td> 
+		                    <td><a href="${pageContext.request.contextPath}/viewFaultDetails?id=${fault.idFault}"><img src="resources/images/ic_location_on_black.png" alt="Map" width="30" height="30" ></a></td>
 		                    <td><a href="${pageContext.request.contextPath}/editFault?id=${fault.idFault}">Edit</a></td>
 		                    <td><a href="${pageContext.request.contextPath}/archiveFault?id=${fault.idFault}">Archive</a></td>
 		                    <td><a href="${pageContext.request.contextPath}/deleteFault?id=${fault.idFault}">Delete</a></td>      
@@ -176,6 +186,7 @@
 	                </c:forEach>
                  </tbody>     
             </table>
+            
 	</div> <!-- close tableHolder -->
 	
 	</div>
@@ -208,6 +219,10 @@ $(document).ready(function(){
 
     }); 
 });
+
+
+
+
 </script>
 
 </body>
