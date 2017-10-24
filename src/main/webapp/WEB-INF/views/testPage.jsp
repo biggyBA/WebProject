@@ -42,7 +42,8 @@ div#map_container{
 	
 <body onload="loadMap()">
 	
-	<div id="map_container"></div>
+	${title}
+	${message}
 		
 
 </body>

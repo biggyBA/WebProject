@@ -1,5 +1,6 @@
 package ba.biggy.config;
 
+
 import java.util.Locale;
 
 import javax.sql.DataSource;
@@ -9,8 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,14 +22,17 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import ba.biggy.dao.FaultDAO;
-import ba.biggy.dao.FaultDAOImpl;
+import ba.biggy.dao.impl.FaultDAOImpl;
 
 
 @Configuration
 @ComponentScan(basePackages="ba.biggy.*")
+@EnableTransactionManagement
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
+
+	
 	
 	@Bean
     public ViewResolver getViewResolver(){
@@ -79,23 +83,26 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         
         //local db
-        /*dataSource.setUrl("jdbc:mysql://localhost:3306/webprojectdb");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/webprojectdb");
         dataSource.setUsername("root");
-        dataSource.setPassword("admin");*/
+        dataSource.setPassword("admin");
         
         
         //online db
-        dataSource.setUrl("jdbc:mysql://localhost:3306/biggyba_webprojectdb");
+        /*dataSource.setUrl("jdbc:mysql://localhost:3306/biggyba_webprojectdb");
         dataSource.setUsername("biggyba_webproje");
-        dataSource.setPassword("i^+-JMn_gOee");
+        dataSource.setPassword("i^+-JMn_gOee");*/
          
         return dataSource;
     }
+	
+	
 	
 	@Bean
 	public FaultDAO getFaultDAO() {
 		return new FaultDAOImpl(getDataSource());
 	}
+	
 	
 	
 	

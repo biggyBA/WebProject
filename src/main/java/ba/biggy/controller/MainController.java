@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +58,19 @@ public class MainController {
  
         return "submitFaultPage";
     }
+    
+    
+    
+    
+    
+    
+    
+    @RequestMapping(value = {"/welcome" }, method = RequestMethod.GET)
+	   public String welcomePage(Model model) {
+	       model.addAttribute("title", "Welcome");
+	       model.addAttribute("message", "This is welcome page!");
+	       return "testPage";
+	   }
 	
 	
 

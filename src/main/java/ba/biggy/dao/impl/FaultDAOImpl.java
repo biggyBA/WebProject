@@ -1,4 +1,4 @@
-package ba.biggy.dao;
+package ba.biggy.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
+import ba.biggy.dao.FaultDAO;
 import ba.biggy.global.Constants;
 import ba.biggy.model.Fault;
 
