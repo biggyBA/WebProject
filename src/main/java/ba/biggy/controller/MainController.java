@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ba.biggy.model.Fault;
+import ba.biggy.model.User;
 
 
 
@@ -30,6 +31,35 @@ public class MainController {
 	}
 	
 	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView showLogin (ModelAndView model) {
+		User user = new User();
+		model.addObject("user", user);
+		
+		model.setViewName("loginPage");
+		return model;
+	}
+	
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String doLogin(@Valid @ModelAttribute("fault") Fault fault,
+            BindingResult result, Map<String, Object> model) {
+ 
+    	
+        if (result.hasErrors()) {
+            return "loginPage";
+        }
+ 
+        return "submitFaultPage";
+    }
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping (value = "/test")
 	public ModelAndView showTest (ModelAndView model) throws IOException{
 		Fault fault = new Fault();
@@ -40,32 +70,8 @@ public class MainController {
 	}
 	
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String viewLogin(Map<String, Object> model) {
-        Fault fault = new Fault();
-        model.put("fault", fault);
-        return "testPage";
-    }
- 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String doLogin(@Valid @ModelAttribute("fault") Fault fault,
-            BindingResult result, Map<String, Object> model) {
- 
-    	
-        if (result.hasErrors()) {
-            return "testPage";
-        }
- 
-        return "submitFaultPage";
-    }
     
-    
-    
-    
-    
-    
-    
-    @RequestMapping(value = {"/welcome" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/home" }, method = RequestMethod.GET)
 	   public String welcomePage(Model model) {
 	       model.addAttribute("title", "Welcome");
 	       model.addAttribute("message", "This is welcome page!");

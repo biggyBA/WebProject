@@ -9,8 +9,12 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -29,6 +33,9 @@ import ba.biggy.dao.impl.FaultDAOImpl;
 @ComponentScan(basePackages="ba.biggy.*")
 @EnableTransactionManagement
 @EnableWebMvc
+@Import({ SecurityConfig.class })
+@EnableWebSecurity
+@EnableGlobalMethodSecurity
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
 
