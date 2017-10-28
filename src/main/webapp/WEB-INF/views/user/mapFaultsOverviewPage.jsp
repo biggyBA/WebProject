@@ -73,7 +73,7 @@
 	</head>
 
 <body onload="loadMap()">
-	<jsp:include page="navigationDrawer.jsp"></jsp:include>
+	<jsp:include page="../navigationDrawer.jsp"></jsp:include>
 
 	<div id="map_container"></div>
 	<button onClick="mapCoordinates()">Try me</button>

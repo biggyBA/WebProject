@@ -1,0 +1,43 @@
+table {
+  text-align: left;
+  line-height: 40px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #000000;
+  width: 100%;
+  border-radius: .25rem;
+  color: white;
+}
+
+tbody tr:hover {
+  background-color: #66a444;
+  cursor: default;
+}
+
+tbody td {
+  border-bottom: 1px solid #008040;
+}
+
+thead th {
+	border-bottom: 1px solid black;
+}
+
+a.button:link {
+    color: white;
+    text-decoration: none;
+}
+
+a.button:visited {
+    color: green;
+    text-decoration: none;
+}
+
+a.button:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
+a.button:active {
+    color: blue;
+    text-decoration: none;
+}

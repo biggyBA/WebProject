@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,7 +27,9 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import ba.biggy.dao.FaultDAO;
+import ba.biggy.dao.UserInfoDAO;
 import ba.biggy.dao.impl.FaultDAOImpl;
+import ba.biggy.dao.impl.UserInfoDAOImpl;
 
 
 @Configuration
@@ -109,6 +112,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	public FaultDAO getFaultDAO() {
 		return new FaultDAOImpl(getDataSource());
 	}
+	
+	@Autowired
+	private UserInfoDAO userInfoDAO;
 	
 	
 	

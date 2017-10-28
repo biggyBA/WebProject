@@ -29,23 +29,23 @@ public class SubmitFaultController {
 	private FaultDAO faultDAO;
 	
 	
-	@RequestMapping(value="/submitFault", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/submitFault", method = RequestMethod.GET)
 	public ModelAndView showSubmitFault(ModelAndView model) throws IOException{
 	    Fault fault = new Fault();
 	    model.addObject("fault", fault);
-	    model.setViewName("submitFaultPage");
+	    model.setViewName("admin/submitFaultPage");
 	    return model;
 	}
 	
 	
 	
-	@RequestMapping(value = "/submitFault", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/submitFault", method = RequestMethod.POST)
 	public ModelAndView saveFault(@Valid @ModelAttribute Fault fault, 
 			BindingResult result, ModelAndView model, HttpServletRequest request) {
 		
 		//Return same page if it has errors
 		if (result.hasErrors()) {
-			model.setViewName("submitFaultPage");
+			model.setViewName("admin/submitFaultPage");
 			return model;
 		}
 		
@@ -67,7 +67,7 @@ public class SubmitFaultController {
 		//Save the fault to MySQL
 		faultDAO.saveOrUpdate(fault);
 		
-		model.setViewName("redirect:/faultsOverview");
+		model.setViewName("redirect:/user/faultsOverview");
 	    return model;
 	}
 	

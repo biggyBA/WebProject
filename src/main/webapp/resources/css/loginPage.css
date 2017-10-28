@@ -55,6 +55,10 @@
 .form .register-form {
   display: none;
 }
+.error{
+  font-size: 24px;
+  color: #ff0000;
+}
 .container {
   position: relative;
   z-index: 1;

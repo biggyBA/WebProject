@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,8 +31,14 @@ public class FaultsOverviewController {
 	@Autowired
 	private FaultDAO faultDAO;
 	
-	@RequestMapping (value = "/faultsOverview")
+	@RequestMapping (value = "/container/faultsOverview")
 	public ModelAndView showToDoFaults (ModelAndView model) {
+		
+		//TODO replace username with user_role
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+		model.addObject("role", name);
+		
 		/*
 		 * Get a list of to do faults from MySQL table
 		 */
@@ -43,33 +51,33 @@ public class FaultsOverviewController {
 		int faultCount = faultDAO.toDoFaultCount();
 		model.addObject("faultCount", faultCount);
 		
-		model.setViewName("faultsOverviewPage");
+		model.setViewName("/container/faultsOverviewContainer");
 		return model;
 	}
 	
 	
 	@RequestMapping(value = "/editFault", method = RequestMethod.GET)
-	public ModelAndView editFault(HttpServletRequest request) {
+	public ModelAndView editFault(ModelAndView model, HttpServletRequest request) {
 		int faultId = Integer.parseInt(request.getParameter("id"));
 		Fault fault = faultDAO.getFaultById(faultId);
-		ModelAndView model = new ModelAndView("editFaultPage");
 		model.addObject("fault", fault);
+		model.setViewName("admin/adminEditFault");
 		return model;
 	}
 	
 	
 	
-	@RequestMapping(value = "/editFault", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/editFault", method = RequestMethod.POST)
 	public ModelAndView updateFault(@Valid @ModelAttribute Fault fault, 
 			BindingResult result, ModelAndView model) {
 		
 		if (result.hasErrors()) {
-			model.setViewName("editFaultPage");
+			model.setViewName("admin/editFaultPage");
 			return model;
 		}
 		
 		faultDAO.saveOrUpdate(fault);
-		model.setViewName("redirect:/faultsOverview");
+		model.setViewName("redirect:/user/faultsOverview");
 	    return model;
 	}
 	
@@ -78,7 +86,7 @@ public class FaultsOverviewController {
 	public ModelAndView archiveFault (HttpServletRequest request) {
 		int faultId = Integer.parseInt(request.getParameter("id"));
 		faultDAO.archiveFault(faultId);
-		return new ModelAndView ("redirect:/faultsOverview");
+		return new ModelAndView ("redirect:/user/faultsOverview");
 	}
 	
 	
@@ -86,11 +94,11 @@ public class FaultsOverviewController {
 	public ModelAndView deleteFault(HttpServletRequest request) {
 	    int faultId = Integer.parseInt(request.getParameter("id"));
 	    faultDAO.deleteFault(faultId);
-	    return new ModelAndView("redirect:/faultsOverview");
+	    return new ModelAndView("redirect:/user/faultsOverview");
 	}
 	
 	
-	@RequestMapping (value = "/faultsOverviewMap")
+	@RequestMapping (value = "/user/faultsOverviewMap")
 	public ModelAndView showToDoFaultsOnMap (ModelAndView model) throws JsonProcessingException {
 		List<Fault> toDoFaults = faultDAO.listToDoFaults();
 		model.addObject("toDoFaults", toDoFaults);
@@ -98,7 +106,7 @@ public class FaultsOverviewController {
 		ObjectMapper objectMapper = new ObjectMapper();
 		model.addObject("faultList", objectMapper.writeValueAsString(toDoFaults));
 		
-		model.setViewName("mapFaultsOverviewPage");
+		model.setViewName("/user/mapFaultsOverviewPage");
 		return model;
 	}
 	
@@ -111,7 +119,7 @@ public class FaultsOverviewController {
 		ObjectMapper objectMapper = new ObjectMapper();
 		model.addObject("faultDetails", objectMapper.writeValueAsString(fault));
 		
-		model.setViewName("faultDetailsMapPage");
+		model.setViewName("/user/faultDetailsMapPage");
 		return model;
 	}
 	
