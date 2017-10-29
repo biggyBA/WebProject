@@ -39,6 +39,7 @@ public class FaultDAOImpl implements FaultDAO {
 			String sql = "UPDATE " + Constants.FAULT_TABLE_NAME + " SET "
 					+ Constants.FAULT_TABLE_LAST_EDIT_COLUMN + "=?, "
 					+ Constants.FAULT_TABLE_SERIAL_NUMBER_COLUMN + "=?, "
+					+ Constants.FAULT_TABLE_PRODUCT_ID_COLUMN + "=?, "
 	        		+ Constants.FAULT_TABLE_CLIENT_NAME_COLUMN + "=?, "
 	        		+ Constants.FAULT_TABLE_CLIENT_STREET_COLUMN + "=?, "
 	        		+ Constants.FAULT_TABLE_CLIENT_POSTAL_CODE + "=?, "
@@ -58,6 +59,7 @@ public class FaultDAOImpl implements FaultDAO {
 			jdbcTemplate.update(sql, 
 					fault.getLastEdit(),
 	        		fault.getProductSerialNumber(),
+	        		fault.getProductId(),
 	        		fault.getClientName(), 
 	        		fault.getClientStreet(), 
 	        		fault.getClientPostalCode(),
@@ -139,6 +141,7 @@ public class FaultDAOImpl implements FaultDAO {
 	 
 	            faults.setIdFault(rs.getInt(Constants.FAULT_TABLE_ID_COLUMN));
 	            faults.setDateTime(rs.getDate(Constants.FAULT_TABLE_DATE_TIME_COLUMN));
+	            faults.setProductId(rs.getString(Constants.FAULT_TABLE_PRODUCT_ID_COLUMN));
 	            faults.setProductType(rs.getString(Constants.FAULT_TABLE_PRODUCT_TYPE_COLUMN));
 	            faults.setClientName(rs.getString(Constants.FAULT_TABLE_CLIENT_NAME_COLUMN));
 	            faults.setClientStreet(rs.getString(Constants.FAULT_TABLE_CLIENT_STREET_COLUMN));

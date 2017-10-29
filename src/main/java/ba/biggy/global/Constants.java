@@ -44,7 +44,47 @@ public class Constants {
 	public static final String FAULT_TABLE_DONE_STATUS = "ServiceDone";
 	
 	
+	/*
+	 * Table to store products
+	 */
 	
+	// Product table name
+	public static final String PRODUCTS_TABLE_NAME = "products";
+	
+	// Product table column names
+	public static final String PRODUCTS_TABLE_ID_COLUMN = "id";
+	public static final String PRODUCTS_TABLE_PRODUCT_ID_COLUMN = "productId";
+	public static final String PRODUCTS_TABLE_PRODUCT_DESCRIPTION_COLUMN = "productDescription";
+	
+	
+	/*
+	 * Table to store users
+	 */
+	public static final String USERS_TABLE_NAME = "users";
+	
+	// Users table column names
+	public static final String USERS_TABLE_USERNAME = "username";
+	public static final String USERS_TABLE_USERS_NAME = "usersName";
+	
+	
+	/*
+	 * Possible user roles
+	 */
+	public static final String ROLE_ADMIN = "ROLE_ADMIN";
+	public static final String ROLE_SERVICEMAN = "ROLE_SERVICEMAN";
+	public static final String ROLE_USER = "ROLE_USER";
+	
+	
+	
+	/*
+	 * Table to store user roles
+	 */
+	public static final String USER_ROLES_TABLE_NAME = "user_roles";
+	
+	// User roles table column names
+	public static final String USER_ROLES_TABLE_USERNAME_COLUMN = "username";
+	public static final String USER_ROLES_TABLE_ROLE_COLUMN = "role";
+	public static final String USER_ROLES_TABLE_USERS_NAME_COLUMN = "usersName";
 	
 	
 	/**

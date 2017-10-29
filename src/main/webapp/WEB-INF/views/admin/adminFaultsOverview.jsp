@@ -19,7 +19,7 @@
 	            <thead>
 	            	<tr class="header">
 		                <th width="60px">Date</th>
-		                <th width="110px">Product type</th>
+		                <th width="110px">Product Id</th>
 		                <th>Client</th>
 		                <th>Street</th>
 		                <th>Place</th>
@@ -41,7 +41,7 @@
 		                <tr>
 		                	<td style="display:none;">${fault.idFault}</td>
 		                	<td class="mytable tr"><fmt:formatDate value="${fault.dateTime}" pattern="dd.MM.yyyy" /></td>
-		                    <td>${fault.productType}</td>
+		                    <td>${fault.productId}</td>
 		                    <td>${fault.clientName}</td> 
 		                    <td>${fault.clientStreet}</td>
 		                    <td>${fault.clientPlace}</td>

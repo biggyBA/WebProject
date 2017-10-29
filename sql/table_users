@@ -4,6 +4,9 @@ CREATE  TABLE users (
   enabled TINYINT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (username));
   
+ALTER TABLE `webprojectdb`.`users` 
+ADD COLUMN `usersName` VARCHAR(45) NULL AFTER `enabled`;
+  
   
 INSERT INTO users(username,password,enabled)
 VALUES ('user','1', true);
@@ -12,4 +15,25 @@ INSERT INTO users(username,password,enabled)
 VALUES ('admin','1', true);
 
 INSERT INTO users(username,password,enabled)
-VALUES ('sm','1', true);
+VALUES ('serviceman','1', true);
+
+INSERT INTO users(username,password,enabled)
+VALUES ('Eldin Hurtic','1', true);
+
+INSERT INTO users(username,password,enabled)
+VALUES ('Hurtic Eldin','1', true);
+
+INSERT INTO users(username,password,enabled)
+VALUES ('Eldin','1', true);
+
+INSERT INTO users(username,password,enabled)
+VALUES ('Eldin H.','1', true);
+
+INSERT INTO users(username,password,enabled)
+VALUES ('Dummy serviceman','1', true);
+
+INSERT INTO users(username,password,enabled)
+VALUES ('Dummy sm','1', true);
+
+INSERT INTO users(username,password,enabled)
+VALUES ('Service man','1', true);

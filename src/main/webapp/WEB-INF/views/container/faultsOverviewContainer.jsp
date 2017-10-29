@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -18,31 +19,27 @@
 		
 		<div id="wrapper">
 	
-			<c:choose>
+			
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<jsp:include page="../admin/adminFaultsOverview.jsp"/>
+			</sec:authorize>
+			
+			<sec:authorize access="hasRole('ROLE_SERVICEMAN')">
+				<jsp:include page="../serviceman/servicemanFaultsOverview.jsp"/>
+			</sec:authorize>
+			
+			<sec:authorize access="hasRole('ROLE_USER')">
+				<jsp:include page="../user/userFaultsOverview.jsp"/>
+			</sec:authorize>
 				
-			    <c:when test="${empty role}">
-			        Oops. Something went wrong.
-			    </c:when>
-			    
-			    
-			    <c:when test="${role=='admin'}">
-			        <jsp:include page="../admin/adminFaultsOverview.jsp"/>
-			    </c:when>
-			    
-			    
-			    <c:when test="${role=='serviceman'}">
-			        <jsp:include page="../serviceman/servicemanFaultsOverview.jsp"/>
-			    </c:when>
-			    
-			    
-			    <c:when test="${role=='user'}">
-			        <jsp:include page="../user/userFaultsOverview.jsp"/>
-			    </c:when>
-			    
-			</c:choose>
+			  
+			<div id="bottomToolbar">
+				<c:if test="${pageContext.request.userPrincipal.name != null}">
+					${pageContext.request.userPrincipal.name}
+				</c:if>
 			
-			
-		<div id="bottomToolbar">${role} <a href="#wrapper">Top</a></div>	
+				<a href="#wrapper">Top</a>
+			</div>	
 		
 		</div> <!-- end wrapper -->
 	

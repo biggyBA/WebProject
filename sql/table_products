@@ -1,0 +1,7 @@
+CREATE TABLE `webprojectdb`.`products` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `productId` VARCHAR(45) NULL,
+  `productDescription` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+  
+  INSERT INTO `webprojectdb`.`products` (`id`, `productId`, `productDescription`) VALUES ('1', '7 kW', '7 kW');

@@ -22,7 +22,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ba.biggy.dao.FaultDAO;
+import ba.biggy.dao.ProductDAO;
+import ba.biggy.dao.UserInfoDAO;
 import ba.biggy.model.Fault;
+import ba.biggy.model.Product;
+import ba.biggy.model.UserInfo;
 import ba.biggy.model.geocoding.Location;
 
 @Controller
@@ -31,14 +35,15 @@ public class FaultsOverviewController {
 	@Autowired
 	private FaultDAO faultDAO;
 	
+	@Autowired
+	private ProductDAO productDAO;
+	
+	@Autowired
+	private UserInfoDAO userInfoDAO;
+	
 	@RequestMapping (value = "/container/faultsOverview")
 	public ModelAndView showToDoFaults (ModelAndView model) {
-		
-		//TODO replace username with user_role
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
-		model.addObject("role", name);
-		
+				
 		/*
 		 * Get a list of to do faults from MySQL table
 		 */
@@ -67,17 +72,17 @@ public class FaultsOverviewController {
 	
 	
 	
-	@RequestMapping(value = "/admin/editFault", method = RequestMethod.POST)
+	@RequestMapping(value = "/editFault", method = RequestMethod.POST)
 	public ModelAndView updateFault(@Valid @ModelAttribute Fault fault, 
 			BindingResult result, ModelAndView model) {
 		
 		if (result.hasErrors()) {
-			model.setViewName("admin/editFaultPage");
+			model.setViewName("admin/adminEditFault");
 			return model;
 		}
 		
 		faultDAO.saveOrUpdate(fault);
-		model.setViewName("redirect:/user/faultsOverview");
+		model.setViewName("redirect:/container/faultsOverview");
 	    return model;
 	}
 	
@@ -94,7 +99,7 @@ public class FaultsOverviewController {
 	public ModelAndView deleteFault(HttpServletRequest request) {
 	    int faultId = Integer.parseInt(request.getParameter("id"));
 	    faultDAO.deleteFault(faultId);
-	    return new ModelAndView("redirect:/user/faultsOverview");
+	    return new ModelAndView("redirect:/container/faultsOverview");
 	}
 	
 	
@@ -125,18 +130,25 @@ public class FaultsOverviewController {
 	
 	
 	
-	/*
-	 *  Needs to be replaced by real code
-	 */
+	
 	@ModelAttribute("servicemanList")
 	public Map<String, String> getServicemanList(){
 	    Map<String, String> servicemanList = new HashMap<String, String>();
-	    servicemanList.put("Serviceman 1", "Serviceman 1");
-	    servicemanList.put("Serviceman 2", "Serviceman 2");
-	    servicemanList.put("Serviceman 3", "Serviceman 3");
-	    servicemanList.put("Serviceman 4", "Serviceman 4");
-	    servicemanList.put("Serviceman 5", "Serviceman 5");
+	    List<UserInfo> allServiceman = userInfoDAO.getAllServiceman();
+	    for (UserInfo userInfo : allServiceman) {
+	    	servicemanList.put(userInfo.getUsersName(), userInfo.getUsersName());
+	    }
 	    return servicemanList;
+	}
+	
+	@ModelAttribute("adminList")
+	public Map<String, String> getAdminList(){
+		Map<String, String> adminList = new HashMap<String, String>();
+		List<UserInfo> allAdmins = userInfoDAO.getAllAdmins();
+		for (UserInfo userInfo : allAdmins) {
+			adminList.put(userInfo.getUsersName(), userInfo.getUsersName());
+		}
+		return adminList;
 	}
 	
 	
@@ -162,20 +174,15 @@ public class FaultsOverviewController {
 	    return typeOfServiceList;
 	}
 	
-	/*
-	 *  Needs to be replaced by real code
-	 */
+	
+	
 	@ModelAttribute("productTypeList")
 	public Map<String, String> getProductTypeList(){
 	    Map<String, String> productTypeList = new HashMap<String, String>();
-	    productTypeList.put("7.5 kW", "7.5 kW");
-	    productTypeList.put("11 kW", "11 kW");
-	    productTypeList.put("10.5 kW", "10.5 kW");
-	    productTypeList.put("20 kW", "20 kW");
-	    productTypeList.put("35 kW", "35 kW");
-	    productTypeList.put("50 kW", "50 kW");
-	    productTypeList.put("75 kW", "75 kW");
-	    productTypeList.put("100 kW", "100 kW");
+	    List<Product> productList = productDAO.getAllProducts();
+	    for (Product product : productList) {
+	    	productTypeList.put(product.getProductId(), product.getProductId());
+	    }
 	    return productTypeList;
 	}
 

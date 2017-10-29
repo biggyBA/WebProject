@@ -19,7 +19,7 @@
 		    
 		    <form:form action="login" method="post" modelAttribute="user" class="login-form">
 		        
-		        <form:input path="userName" type="text" placeholder="username"/>
+		        <form:input path="username" type="text" placeholder="username"/>
 		        
 		        <form:input path="password" type="password" placeholder="password"/>
 		        

@@ -27,8 +27,10 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import ba.biggy.dao.FaultDAO;
+import ba.biggy.dao.ProductDAO;
 import ba.biggy.dao.UserInfoDAO;
 import ba.biggy.dao.impl.FaultDAOImpl;
+import ba.biggy.dao.impl.ProductDAOImpl;
 import ba.biggy.dao.impl.UserInfoDAOImpl;
 
 
@@ -113,8 +115,15 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 		return new FaultDAOImpl(getDataSource());
 	}
 	
-	@Autowired
-	private UserInfoDAO userInfoDAO;
+	@Bean
+	public UserInfoDAO getUserInfoDAO() {
+		return new UserInfoDAOImpl(getDataSource());
+	}
+	
+	@Bean 
+	public ProductDAO getProductDAO() {
+		return new ProductDAOImpl(getDataSource());
+	}
 	
 	
 	

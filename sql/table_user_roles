@@ -7,6 +7,9 @@ CREATE TABLE user_roles (
   KEY fk_username_idx (username),
   CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users (username));
   
+ALTER TABLE `webprojectdb`.`user_roles` 
+ADD COLUMN `usersName` VARCHAR(45) NULL AFTER `role`;
+  
   
 INSERT INTO user_roles (username, role)
 VALUES ('user', 'ROLE_USER');
@@ -17,3 +20,23 @@ VALUES ('admin', 'ROLE_ADMIN');
 INSERT INTO user_roles (username, role)
 VALUES ('serviceman', 'ROLE_SERVICEMAN');
 
+INSERT INTO user_roles (username, role)
+VALUES ('Eldin Hurtic','ROLE_ADMIN');
+
+INSERT INTO user_roles (username, role)
+VALUES ('Hurtic Eldin','ROLE_ADMIN');
+
+INSERT INTO user_roles (username, role)
+VALUES ('Eldin','ROLE_ADMIN');
+
+INSERT INTO user_roles (username, role)
+VALUES ('Eldin H.','ROLE_ADMIN');
+
+INSERT INTO user_roles (username, role)
+VALUES ('Dummy serviceman', 'ROLE_SERVICEMAN');
+
+INSERT INTO user_roles (username, role)
+VALUES ('Dummy sm', 'ROLE_SERVICEMAN');
+
+INSERT INTO user_roles (username, role)
+VALUES ('Service man', 'ROLE_SERVICEMAN');

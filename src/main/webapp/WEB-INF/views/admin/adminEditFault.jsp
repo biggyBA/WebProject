@@ -168,7 +168,7 @@
 						    		<td>
 						            	<form:select path="faultIssuedTo">
 											<form:option value="" label="Select"/>
-										    <form:options  items="${usersList}"/>
+										    <form:options  items="${servicemanList}"/>
 										</form:select>	
 		            		 		</td>
 		            		 	</tr>
@@ -183,7 +183,7 @@
 						    		<td>
 						            	<form:select path="faultIssuedBy">
 											<form:option value="" label="Select"/>
-										    <form:options  items="${usersList}"/>
+										    <form:options  items="${adminList}"/>
 										</form:select>	
 		            				</td>
 		            		 	</tr>
@@ -219,11 +219,17 @@
 		            		 	</tr>
 		            		 	<tr><td></td>
 					        	<td id="errorMessage"><form:errors path="faultPriority"/></td>
+					        	</tr>
+					        	
+					        	<tr>
+					        		<td colspan="2">
+					        			<input type="submit" value=<spring:message code="label.submitButton"/> id="submitBtn"/>
+					        		</td>
 					        	</tr>  
 		            		 	
 							</table>
 						
-							<input type="submit" value=<spring:message code="label.submitButton"/> id="submitBtn"/>
+							
 						
 						</form:form>
 						

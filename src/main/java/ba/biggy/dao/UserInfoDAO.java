@@ -6,7 +6,12 @@ import ba.biggy.model.UserInfo;
 
 public interface UserInfoDAO {
 	
+	public List<UserInfo> getAllAdmins();
 	
-	public List<String> getUserRoles(String username);
+	public List<UserInfo> getAllServiceman();
+	
+	public List<UserInfo> getAllUsers();
+	
+	public UserInfo getUserById (int id);
 
 }

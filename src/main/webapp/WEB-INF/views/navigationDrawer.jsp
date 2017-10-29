@@ -68,7 +68,7 @@ body {
   <a href="${pageContext.request.contextPath}/test">Test</a>
   <c:if test="${pageContext.request.userPrincipal.name != null}">
      | &nbsp;
-     <a href="${pageContext.request.contextPath}/login">Logout</a>
+     <a href="${pageContext.request.contextPath}/logout">Logout</a>
   </c:if>
 </div>
 

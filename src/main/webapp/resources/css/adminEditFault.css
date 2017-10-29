@@ -1,5 +1,5 @@
 #wrapper{
-	background-color: green;
+	background-color: #76b852;
 	height:90vh;
 	width:100%;
 	text-align: center;
@@ -65,22 +65,14 @@ textarea {
      width: 88%;
 }
 
-label{
-	display: block;
-	margin-top: 5px;
-	margin-left: 15px;
-	font-family: 'Merriweather', sans-serif;
-	color: white;
-	font-weight: bold;
-}
 
 table {
   text-align: left;
-  line-height: 40px;
+  line-height: 30px;
   border-collapse: separate;
   border-spacing: 0;
   border: 0px solid #ccf5ff;
-  width: 80%;
+  width: 100%;
   margin: 10px auto;
   border-radius: .25rem;
 }

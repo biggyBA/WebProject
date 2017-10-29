@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +38,7 @@ public class MainController {
 	@Autowired
 	private FaultDAO faultDAO;
 	
+	
 	@RequestMapping(value="/")
 	public ModelAndView showHomescreen(ModelAndView model) throws IOException{
 		//TODO handle redirect based on user_role
@@ -48,6 +53,15 @@ public class MainController {
 		
 		model.setViewName("loginPage");
 		return model;
+	}
+	
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null){    
+	        new SecurityContextLogoutHandler().logout(request, response, auth);
+	    }
+	    return "redirect:/login?logout";
 	}
 	
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -81,19 +95,26 @@ public class MainController {
 	
 	
 	@RequestMapping (value = "/test")
-	public ModelAndView showTest (ModelAndView model) throws IOException{
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	      String name = auth.getName();
-	      model.addObject("msg", name); 
-		model.addObject("role", name);
+	public ModelAndView showTest (ModelAndView model, Authentication authentication) throws IOException{
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      //String name = auth.getName();
+	      //model.addObject("msg", name); 
+		//model.addObject("role", name);
+		
+		/*UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		System.out.println("User has authorities: " + userDetails.getAuthorities());*/
+		//UserAuthentication userAuth = new UserAuthentication();
+		if (hasRole("ROLE_USER")) {
+			String ad = "hasRoleAdmin";
+			model.addObject("str", ad);
+		}else {
+			String ad = "hasNotRoleAdmin";
+			model.addObject("str", ad);
+		}
 		
 		
-		List<Fault> toDoFaults = faultDAO.listToDoFaults();
-		model.addObject("toDoFaults", toDoFaults);
 		
-		
-		
-		model.setViewName("/container/faultsOverviewContainer");
+		model.setViewName("/testPage");
 	
 		return model;
 	}
@@ -107,6 +128,18 @@ public class MainController {
 	       return "testPage";
 	   }
 	
-	
+    
+    private boolean hasRole(String role) {
+		  @SuppressWarnings("unchecked")
+		  Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		  boolean hasRole = false;
+		  for (GrantedAuthority authority : authorities) {
+		     hasRole = authority.getAuthority().equals(role);
+		     if (hasRole) {
+			  break;
+		     }
+		  }
+		  return hasRole;
+		}
 
 }
