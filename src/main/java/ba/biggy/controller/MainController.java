@@ -111,10 +111,11 @@ public class MainController {
 			String ad = "hasNotRoleAdmin";
 			model.addObject("str", ad);
 		}
+		Fault fault = new Fault();
+		model.addObject("fault", fault);
 		
 		
-		
-		model.setViewName("/testPage");
+		model.setViewName("/admin/adminSubmitFault");
 	
 		return model;
 	}

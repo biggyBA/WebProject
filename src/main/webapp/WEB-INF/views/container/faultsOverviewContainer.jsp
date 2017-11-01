@@ -11,6 +11,27 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link href="<c:url value="/resources/css/containerFaultsOverviewContainer.css" />" rel="stylesheet">
 		<title>Faults overview</title>
+		<script type="text/javascript">
+			function onReady(callback) {
+			    var intervalID = window.setInterval(checkReady, 1000);
+			
+			function checkReady() {
+			    if (document.getElementsByTagName('body')[0] !== undefined) {
+			            window.clearInterval(intervalID);
+			            callback.call(this);
+			        }
+			    }
+			}
+			
+			function show(id, value) {
+			    document.getElementById(id).style.display = value ? 'block' : 'none';
+			}
+			
+			onReady(function () {
+			    show('wrapper', true);
+			    show('loading', false);
+			});
+		</script>
 	</head>
 	
 	<body>

@@ -4,4 +4,7 @@ CREATE TABLE `webprojectdb`.`products` (
   `productDescription` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
   
-  INSERT INTO `webprojectdb`.`products` (`id`, `productId`, `productDescription`) VALUES ('1', '7 kW', '7 kW');
+INSERT INTO `webprojectdb`.`products` (`id`, `productId`, `productDescription`) VALUES ('1', '7 kW', '7 kW');
+INSERT INTO `webprojectdb`.`products` (`id`, `productId`, `productDescription`) VALUES ('2', '10 kW', '10 kW');
+INSERT INTO `webprojectdb`.`products` (`id`, `productId`, `productDescription`) VALUES ('3', '15 kW', '15 kW');
+INSERT INTO `webprojectdb`.`products` (`id`, `productId`, `productDescription`) VALUES ('4', '20 kW', '20 kW');

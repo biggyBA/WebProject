@@ -2,6 +2,7 @@ package ba.biggy.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ba.biggy.dao.FaultDAO;
+import ba.biggy.dao.ProductDAO;
+import ba.biggy.dao.UserInfoDAO;
 import ba.biggy.global.Geocoding;
 import ba.biggy.model.Fault;
+import ba.biggy.model.Product;
+import ba.biggy.model.UserInfo;
 import ba.biggy.model.geocoding.Location;
 
 
@@ -28,24 +33,30 @@ public class SubmitFaultController {
 	@Autowired
 	private FaultDAO faultDAO;
 	
+	@Autowired
+	private ProductDAO productDAO;
 	
-	@RequestMapping(value="/admin/submitFault", method = RequestMethod.GET)
+	@Autowired
+	private UserInfoDAO userInfoDAO;
+	
+	
+	@RequestMapping(value="/submitFault", method = RequestMethod.GET)
 	public ModelAndView showSubmitFault(ModelAndView model) throws IOException{
 	    Fault fault = new Fault();
 	    model.addObject("fault", fault);
-	    model.setViewName("admin/submitFaultPage");
+	    model.setViewName("admin/adminSubmitFault");
 	    return model;
 	}
 	
 	
 	
-	@RequestMapping(value = "/admin/submitFault", method = RequestMethod.POST)
+	@RequestMapping(value = "/submitFault", method = RequestMethod.POST)
 	public ModelAndView saveFault(@Valid @ModelAttribute Fault fault, 
 			BindingResult result, ModelAndView model, HttpServletRequest request) {
 		
 		//Return same page if it has errors
 		if (result.hasErrors()) {
-			model.setViewName("admin/submitFaultPage");
+			model.setViewName("/admin/adminSubmitFault");
 			return model;
 		}
 		
@@ -67,7 +78,7 @@ public class SubmitFaultController {
 		//Save the fault to MySQL
 		faultDAO.saveOrUpdate(fault);
 		
-		model.setViewName("redirect:/user/faultsOverview");
+		model.setViewName("redirect:/container/faultsOverview");
 	    return model;
 	}
 	
@@ -76,27 +87,33 @@ public class SubmitFaultController {
 	
 	
 	
-	/*
-	 *  Needs to be replaced by real code
-	 */
+	
 	@ModelAttribute("servicemanList")
 	public Map<String, String> getServicemanList(){
-	    Map<String, String> servicemanList = new HashMap<String, String>();
-	    servicemanList.put("Serviceman 1", "Serviceman 1");
-	    servicemanList.put("Serviceman 2", "Serviceman 2");
-	    servicemanList.put("Serviceman 3", "Serviceman 3");
-	    servicemanList.put("Serviceman 4", "Serviceman 4");
-	    servicemanList.put("Serviceman 5", "Serviceman 5");
+		Map<String, String> servicemanList = new HashMap<String, String>();
+	    List<UserInfo> allServiceman = userInfoDAO.getAllServiceman();
+	    for (UserInfo userInfo : allServiceman) {
+	    	servicemanList.put(userInfo.getUsersName(), userInfo.getUsersName());
+	    }
 	    return servicemanList;
 	}
 	
+	@ModelAttribute("adminList")
+	public Map<String, String> getAdminList(){
+		Map<String, String> adminList = new HashMap<String, String>();
+		List<UserInfo> allAdmins = userInfoDAO.getAllAdmins();
+		for (UserInfo userInfo : allAdmins) {
+			adminList.put(userInfo.getUsersName(), userInfo.getUsersName());
+		}
+		return adminList;
+	}
 	
 	/*
 	 *  Needs to be replaced by real code
 	 */
 	@ModelAttribute("usersList")
 	public Map<String, String> getUsersList(){
-	    Map<String, String> usersList = new HashMap<String, String>();
+		Map<String, String> usersList = new HashMap<String, String>();
 	    usersList.put("User 1", "User 1");
 	    usersList.put("User 2", "User 2");
 	    return usersList;
@@ -113,20 +130,14 @@ public class SubmitFaultController {
 	    return typeOfServiceList;
 	}
 	
-	/*
-	 *  Needs to be replaced by real code
-	 */
+	
 	@ModelAttribute("productTypeList")
 	public Map<String, String> getProductTypeList(){
-	    Map<String, String> productTypeList = new HashMap<String, String>();
-	    productTypeList.put("7.5 kW", "7.5 kW");
-	    productTypeList.put("11 kW", "11 kW");
-	    productTypeList.put("10.5 kW", "10.5 kW");
-	    productTypeList.put("20 kW", "20 kW");
-	    productTypeList.put("35 kW", "35 kW");
-	    productTypeList.put("50 kW", "50 kW");
-	    productTypeList.put("75 kW", "75 kW");
-	    productTypeList.put("100 kW", "100 kW");
+		Map<String, String> productTypeList = new HashMap<String, String>();
+	    List<Product> productList = productDAO.getAllProducts();
+	    for (Product product : productList) {
+	    	productTypeList.put(product.getProductId(), product.getProductId());
+	    }
 	    return productTypeList;
 	}
 	

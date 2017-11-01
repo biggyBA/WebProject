@@ -62,7 +62,7 @@ body {
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="${pageContext.request.contextPath}/admin/submitFault">Submit fault</a>
+  <a href="${pageContext.request.contextPath}/submitFault">Submit fault</a>
   <a href="${pageContext.request.contextPath}/container/faultsOverview">Faults overview</a>
   <a href="${pageContext.request.contextPath}/user/faultsOverviewMap">Map faults overview</a>
   <a href="${pageContext.request.contextPath}/test">Test</a>
