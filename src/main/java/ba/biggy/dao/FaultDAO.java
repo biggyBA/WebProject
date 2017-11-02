@@ -10,6 +10,8 @@ public interface FaultDAO {
 	
 	public List<Fault> listToDoFaults();
 	
+	public List<Fault> listFaultsByServiceman (String serviceman);
+	
 	public Fault getFaultById (int faultId);
 	
 	public void archiveFault (int faultId);

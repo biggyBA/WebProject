@@ -1,6 +1,7 @@
 package ba.biggy.controller;
 
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -24,6 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ba.biggy.dao.FaultDAO;
 import ba.biggy.dao.ProductDAO;
 import ba.biggy.dao.UserInfoDAO;
+import ba.biggy.global.Constants;
 import ba.biggy.model.Fault;
 import ba.biggy.model.Product;
 import ba.biggy.model.UserInfo;
@@ -43,19 +46,25 @@ public class FaultsOverviewController {
 	
 	@RequestMapping (value = "/container/faultsOverview")
 	public ModelAndView showToDoFaults (ModelAndView model) {
-				
-		/*
-		 * Get a list of to do faults from MySQL table
-		 */
-		List<Fault> toDoFaults = faultDAO.listToDoFaults();
-		model.addObject("toDoFaults", toDoFaults);
 		
-		/*
-		 * Get a count of to do faults
-		 */
-		int faultCount = faultDAO.toDoFaultCount();
-		model.addObject("faultCount", faultCount);
-		
+		if (hasRole(Constants.ROLE_SERVICEMAN)) {
+			// Get the current logged in username
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		    String name = auth.getName();
+		    // Get his real name
+		    UserInfo userInfo = userInfoDAO.getUserByUsername(name);
+		    String usersName = userInfo.getUsersName();
+		    // Get a list of faults assigned to him
+			List<Fault> myServices = faultDAO.listFaultsByServiceman(usersName);
+			model.addObject("toDoFaults", myServices);
+		}else {
+			//Get a list of all to do faults from MySQL table
+			List<Fault> toDoFaults = faultDAO.listToDoFaults();
+			model.addObject("toDoFaults", toDoFaults);
+			//Get a count of to do faults
+			int faultCount = faultDAO.toDoFaultCount();
+			model.addObject("faultCount", faultCount);
+		}
 		model.setViewName("/container/faultsOverviewContainer");
 		return model;
 	}
@@ -121,13 +130,13 @@ public class FaultsOverviewController {
 	public ModelAndView viewFaultDetails(HttpServletRequest request, ModelAndView model) throws JsonProcessingException {
 		int faultId = Integer.parseInt(request.getParameter("id"));
 		Fault fault = faultDAO.getFaultById(faultId);
+		model.addObject("fault", fault);
 		ObjectMapper objectMapper = new ObjectMapper();
 		model.addObject("faultDetails", objectMapper.writeValueAsString(fault));
 		
-		model.setViewName("/user/faultDetailsMapPage");
+		model.setViewName("/container/faultDetailsMapContainer");
 		return model;
 	}
-	
 	
 	
 	
@@ -184,6 +193,23 @@ public class FaultsOverviewController {
 	    	productTypeList.put(product.getProductId(), product.getProductId());
 	    }
 	    return productTypeList;
+	}
+	
+	
+	/*
+	 * Method to check users role
+	 */
+	private boolean hasRole(String role) {
+		  @SuppressWarnings("unchecked")
+		  Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		  boolean hasRole = false;
+		  for (GrantedAuthority authority : authorities) {
+		     hasRole = authority.getAuthority().equals(role);
+		     if (hasRole) {
+			  break;
+		     }
+		  }
+		  return hasRole;
 	}
 
 }

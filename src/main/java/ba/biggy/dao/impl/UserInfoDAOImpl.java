@@ -7,8 +7,10 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Service;
@@ -76,6 +78,26 @@ public class UserInfoDAOImpl implements UserInfoDAO {
 	public UserInfo getUserById(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public UserInfo getUserByUsername(String username) {
+		String sql = "SELECT usersName FROM users WHERE username = '"+ username +"'";
+		return jdbcTemplate.query(sql,new ResultSetExtractor<UserInfo>() {
+
+			@Override
+			public UserInfo extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					UserInfo userInfo = new UserInfo();
+					
+					userInfo.setUsersName(rs.getString(Constants.USERS_TABLE_USERS_NAME));
+					
+					return userInfo;
+				}
+				return null;
+			}
+			
+		});
 	}
 
 	

@@ -165,6 +165,47 @@ public class FaultDAOImpl implements FaultDAO {
 	    return faultsToDo;
 		
 	}
+	
+	
+	/**
+	 * Returns a list of faults with a status "UrgentToDo" in the "faultStatus" column and provided serviceman name in the "issuedTo" column
+	 */
+	@Override
+	public List<Fault> listFaultsByServiceman (String serviceman) {
+		String sql = "SELECT * FROM " + Constants.FAULT_TABLE_NAME + " WHERE " + Constants.FAULT_TABLE_FAULT_STATUS_COLUMN + " = '"+ Constants.FAULT_TABLE_TO_DO_STATUS +"'" + " AND " + 
+					Constants.FAULT_TABLE_FAULT_ISSUED_TO_COLUMN + " = '"+ serviceman +"'";
+	    List<Fault> faultsToDo = jdbcTemplate.query(sql, new RowMapper<Fault>() {
+	 
+	        @Override
+	        public Fault mapRow(ResultSet rs, int rowNum) throws SQLException {
+	            Fault faults = new Fault();
+	 
+	            faults.setIdFault(rs.getInt(Constants.FAULT_TABLE_ID_COLUMN));
+	            faults.setDateTime(rs.getDate(Constants.FAULT_TABLE_DATE_TIME_COLUMN));
+	            faults.setProductId(rs.getString(Constants.FAULT_TABLE_PRODUCT_ID_COLUMN));
+	            faults.setProductType(rs.getString(Constants.FAULT_TABLE_PRODUCT_TYPE_COLUMN));
+	            faults.setClientName(rs.getString(Constants.FAULT_TABLE_CLIENT_NAME_COLUMN));
+	            faults.setClientStreet(rs.getString(Constants.FAULT_TABLE_CLIENT_STREET_COLUMN));
+	            faults.setClientPostalCode(rs.getString(Constants.FAULT_TABLE_CLIENT_POSTAL_CODE));
+	            faults.setClientPlace(rs.getString(Constants.FAULT_TABLE_CLIENT_PLACE_COLUMN));
+	            faults.setClientPhoneOne(rs.getString(Constants.FAULT_TABLE_CLIENT_PHONE_ONE_COLUMN));
+	            faults.setClientPhoneTwo(rs.getString(Constants.FAULT_TABLE_CLIENT_PHONE_TWO_COLUMN));
+	            faults.setFaultDescription(rs.getString(Constants.FAULT_TABLE_FAULT_DESCRIPTION_COLUMN));
+	            faults.setFaultNote(rs.getString(Constants.FAULT_TABLE_FAULT_NOTE_COLUMN));
+	            faults.setFaultIssuedTo(rs.getString(Constants.FAULT_TABLE_FAULT_ISSUED_TO_COLUMN));
+	            faults.setFaultType(rs.getString(Constants.FAULT_TABLE_FAULT_TYPE_COLUMN));
+	            faults.setFaultPriority(rs.getString(Constants.FAULT_TABLE_FAULT_PRIORITY_COLUMN));
+	            faults.setFaultLat(rs.getDouble(Constants.FAULT_TABLE_FAULT_FAULT_LAT));
+	            faults.setFaultLng(rs.getDouble(Constants.FAULT_TABLE_FAULT_FAULT_LNG));
+	     
+	            return faults;
+	        }
+	 
+	    });
+	 
+	    return faultsToDo;
+		
+	}
 
 
 	/**

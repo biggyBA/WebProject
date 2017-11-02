@@ -13,5 +13,7 @@ public interface UserInfoDAO {
 	public List<UserInfo> getAllUsers();
 	
 	public UserInfo getUserById (int id);
+	
+	public UserInfo getUserByUsername (String username);
 
 }
