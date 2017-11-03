@@ -115,7 +115,7 @@ public class MainController {
 		model.addObject("fault", fault);
 		
 		
-		model.setViewName("/admin/adminSubmitFault");
+		model.setViewName("testPage");
 	
 		return model;
 	}
