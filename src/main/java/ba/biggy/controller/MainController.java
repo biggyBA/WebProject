@@ -94,7 +94,7 @@ public class MainController {
 	
 	
 	
-	@RequestMapping (value = "/test")
+	@RequestMapping (value = "/test", method = RequestMethod.GET)
 	public ModelAndView showTest (ModelAndView model, Authentication authentication) throws IOException{
 		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	      //String name = auth.getName();
@@ -104,7 +104,7 @@ public class MainController {
 		/*UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		System.out.println("User has authorities: " + userDetails.getAuthorities());*/
 		//UserAuthentication userAuth = new UserAuthentication();
-		if (hasRole("ROLE_USER")) {
+		/*if (hasRole("ROLE_USER")) {
 			String ad = "hasRoleAdmin";
 			model.addObject("str", ad);
 		}else {
@@ -112,10 +112,13 @@ public class MainController {
 			model.addObject("str", ad);
 		}
 		Fault fault = new Fault();
-		model.addObject("fault", fault);
+		model.addObject("fault", fault);*/
 		
 		
-		model.setViewName("testPage");
+		List<Fault> faults = faultDAO.listToDoFaults();
+		model.addObject("faults", faults);
+		
+		model.setViewName("pdfView");
 	
 		return model;
 	}
@@ -123,10 +126,12 @@ public class MainController {
 	
     
     @RequestMapping(value = {"/home" }, method = RequestMethod.GET)
-	   public String welcomePage(Model model) {
-	       model.addAttribute("title", "Welcome");
-	       model.addAttribute("message", "This is welcome page!");
-	       return "testPage";
+	   public ModelAndView welcomePage(ModelAndView model) {
+    	List<Fault> faults = faultDAO.listToDoFaults();
+		model.addObject("faulty", faults);
+		
+		model.setViewName("testPage");
+	       return model;
 	   }
 	
     

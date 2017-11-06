@@ -5,26 +5,30 @@ import java.util.Locale;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.http.MediaType;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
 import ba.biggy.dao.FaultDAO;
 import ba.biggy.dao.ProductDAO;
@@ -44,15 +48,39 @@ import ba.biggy.dao.impl.UserInfoDAOImpl;
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
 
-	
+	@Bean
+	public ViewResolver beanNameViewResolver() {
+	      ResourceBundleViewResolver resolver = new ResourceBundleViewResolver();
+	      resolver.setOrder(1);
+	      resolver.setBasename("views");
+	      return resolver;
+	}
 	
 	@Bean
     public ViewResolver getViewResolver(){
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setOrder(2);
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
         return resolver;
     }
+	
+	/*@Override
+	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+		configurer
+				.defaultContentType(MediaType.TEXT_HTML)
+				.ignoreAcceptHeader(true);
+	}
+	
+	@Override
+	 public void configureViewResolvers(ViewResolverRegistry registry) {
+		registry.jsp("/WEB-INF/views/", ".jsp").viewClass(JstlView.class);
+		registry.enableContentNegotiation(
+				new XlsView(),
+				new XlsxView(),
+				new PdfView());
+	}*/
+	
 	
 	@Bean
 	public MessageSource messageSource() {
