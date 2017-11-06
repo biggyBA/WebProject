@@ -1,4 +1,4 @@
-package ba.biggy.view;
+package ba.biggy.config;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;

@@ -128,9 +128,9 @@ public class MainController {
     @RequestMapping(value = {"/home" }, method = RequestMethod.GET)
 	   public ModelAndView welcomePage(ModelAndView model) {
     	List<Fault> faults = faultDAO.listToDoFaults();
-		model.addObject("faulty", faults);
+		model.addObject("faults", faults);
 		
-		model.setViewName("testPage");
+		model.setViewName("myPdfView");
 	       return model;
 	   }
 	

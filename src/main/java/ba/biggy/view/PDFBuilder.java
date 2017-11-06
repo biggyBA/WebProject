@@ -16,6 +16,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import ba.biggy.config.AbstractITextPdfView;
 import ba.biggy.model.Fault;
  
 /**
