@@ -12,7 +12,7 @@
 	</head>
 	
 <body>
-	<jsp:include page="../navigationDrawer.jsp"></jsp:include>
+	<jsp:include page="../../navigationDrawer.jsp"></jsp:include>
 	<div id="tableHolder">
 	
             

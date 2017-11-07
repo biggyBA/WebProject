@@ -1,6 +1,7 @@
 package ba.biggy.config;
 
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.sql.DataSource;
@@ -13,9 +14,17 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
+import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
+import org.springframework.mobile.device.DeviceWebArgumentResolver;
+import org.springframework.mobile.device.site.SitePreferenceHandlerInterceptor;
+import org.springframework.mobile.device.site.SitePreferenceHandlerMethodArgumentResolver;
+import org.springframework.mobile.device.switcher.SiteSwitcherHandlerInterceptor;
+import org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -47,6 +56,27 @@ import ba.biggy.dao.impl.UserInfoDAOImpl;
 @EnableGlobalMethodSecurity
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
+	@Bean
+	public DeviceResolverHandlerInterceptor deviceResolverHandlerInterceptor() {
+	    return new DeviceResolverHandlerInterceptor();
+	}
+	
+	@Bean
+	public SitePreferenceHandlerInterceptor sitePreferenceHandlerInterceptor() {
+	    return new SitePreferenceHandlerInterceptor();
+	}
+	
+	@Bean
+	public SitePreferenceHandlerMethodArgumentResolver sitePreferenceHandlerMethodArgumentResolver() {
+	    return new SitePreferenceHandlerMethodArgumentResolver();
+	}
+	
+	@Bean
+	public DeviceHandlerMethodArgumentResolver deviceHandlerMethodArgumentResolver() {
+	    return new DeviceHandlerMethodArgumentResolver();
+	}
+	
+	
 
 	@Bean
 	public ViewResolver beanNameViewResolver() {
@@ -56,14 +86,29 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	      return resolver;
 	}
 	
-	@Bean
+	/*@Bean
     public ViewResolver getViewResolver(){
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setOrder(2);
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
         return resolver;
-    }
+    }*/
+	
+	
+	@Bean
+	public LiteDeviceDelegatingViewResolver liteDeviceAwareViewResolver() {
+	    InternalResourceViewResolver delegate = new InternalResourceViewResolver();
+	    delegate.setOrder(2);
+	    delegate.setPrefix("/WEB-INF/views/");
+	    delegate.setSuffix(".jsp");
+	    LiteDeviceDelegatingViewResolver resolver = new LiteDeviceDelegatingViewResolver(delegate);
+	    resolver.setMobilePrefix("mobile/");
+	    resolver.setTabletPrefix("tablet/");
+	    resolver.setNormalPrefix("web/");
+	    resolver.setEnableFallback(true);
+	    return resolver;
+	}
 	
 	/*@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
@@ -109,7 +154,15 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeInterceptor());
+        registry.addInterceptor(deviceResolverHandlerInterceptor());
+	    registry.addInterceptor(sitePreferenceHandlerInterceptor());
     }
+    
+    @Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+	    argumentResolvers.add(sitePreferenceHandlerMethodArgumentResolver());
+	    argumentResolvers.add(deviceHandlerMethodArgumentResolver());
+	}
 	
 	
 	@Override

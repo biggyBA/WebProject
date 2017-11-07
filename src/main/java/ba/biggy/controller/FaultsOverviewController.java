@@ -65,7 +65,7 @@ public class FaultsOverviewController {
 			int faultCount = faultDAO.toDoFaultCount();
 			model.addObject("faultCount", faultCount);
 		}
-		model.setViewName("/container/faultsOverviewContainer");
+		model.setViewName("container/faultsOverviewContainer");
 		return model;
 	}
 	
@@ -100,7 +100,7 @@ public class FaultsOverviewController {
 	public ModelAndView archiveFault (HttpServletRequest request) {
 		int faultId = Integer.parseInt(request.getParameter("id"));
 		faultDAO.archiveFault(faultId);
-		return new ModelAndView ("redirect:/user/faultsOverview");
+		return new ModelAndView ("redirect:/container/faultsOverview");
 	}
 	
 	
@@ -112,6 +112,7 @@ public class FaultsOverviewController {
 	}
 	
 	
+	//TODO replace with container
 	@RequestMapping (value = "/user/faultsOverviewMap")
 	public ModelAndView showToDoFaultsOnMap (ModelAndView model) throws JsonProcessingException {
 		List<Fault> toDoFaults = faultDAO.listToDoFaults();
@@ -134,7 +135,7 @@ public class FaultsOverviewController {
 		ObjectMapper objectMapper = new ObjectMapper();
 		model.addObject("faultDetails", objectMapper.writeValueAsString(fault));
 		
-		model.setViewName("/container/faultDetailsMapContainer");
+		model.setViewName("container/faultDetailsMapContainer");
 		return model;
 	}
 	

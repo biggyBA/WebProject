@@ -5,12 +5,15 @@ import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.Device;
+import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,6 +37,8 @@ import ba.biggy.model.UserInfo;
 
 @Controller
 public class MainController {
+	
+	private static final Logger logger = Logger.getLogger(MainController.class.getName());
 	
 	@Autowired
 	private FaultDAO faultDAO;
@@ -95,7 +100,7 @@ public class MainController {
 	
 	
 	@RequestMapping (value = "/test", method = RequestMethod.GET)
-	public ModelAndView showTest (ModelAndView model, Authentication authentication) throws IOException{
+	public ModelAndView showTest (ModelAndView model, Authentication authentication, SitePreference sitePreference, Device device) throws IOException{
 		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	      //String name = auth.getName();
 	      //model.addObject("msg", name); 
@@ -114,6 +119,9 @@ public class MainController {
 		Fault fault = new Fault();
 		model.addObject("fault", fault);*/
 		
+		logger.info("SitePreference : " + sitePreference);
+        logger.info("Device : " + device);
+	
 		
 		List<Fault> faults = faultDAO.listToDoFaults();
 		model.addObject("faults", faults);

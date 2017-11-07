@@ -36,7 +36,7 @@
 	
 	<body>
 	
-		<jsp:include page="../navigationDrawer.jsp"/>
+		<jsp:include page="../../navigationDrawer.jsp"/>
 		
 		<div id="wrapper">
 	

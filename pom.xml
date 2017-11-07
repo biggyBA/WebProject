@@ -17,7 +17,7 @@
 		<jackson.version>2.9.0</jackson.version>
 		<spring.security.version>4.2.3.RELEASE</spring.security.version>
 		<itext.version>5.5.10</itext.version>
-		
+		<spring-mobile-device-version>1.1.5.RELEASE</spring-mobile-device-version>
   </properties>
   
   
@@ -60,6 +60,13 @@
           <artifactId>spring-jdbc</artifactId>
           <version>${spring.version}</version>
       	</dependency>
+      	
+      	<!-- Spring mobile -->
+      	<dependency>
+            <groupId>org.springframework.mobile</groupId>
+            <artifactId>spring-mobile-device</artifactId>
+            <version>${spring-mobile-device-version}</version>
+        </dependency>
       	
       	
       	<!-- Spring Security -->
@@ -194,7 +201,13 @@
 	    
   </dependencies>  
   
-
+	<repositories>
+        <repository>
+            <id>spring-milestone</id>
+            <name>SpringSource Milestone Repository</name>
+            <url>http://repo.springsource.org/milestone</url>
+        </repository>
+    </repositories>
 
 
   <build>
