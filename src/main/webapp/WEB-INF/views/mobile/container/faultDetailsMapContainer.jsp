@@ -8,7 +8,7 @@
 <html>
 
 	<head>
-		<link href="<c:url value="/resources/css/containerFaultDetailsMapContainer.css" />" rel="stylesheet">
+		<link href="<c:url value="/resources/css/_mContainerFaultDetailsMapContainer.css" />" rel="stylesheet">
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDiC6WFTBReLHHd7dPBhsBBSKYeezb-zYk"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<script>

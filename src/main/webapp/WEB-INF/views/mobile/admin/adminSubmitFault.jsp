@@ -7,7 +7,7 @@
 <html>
 
 	<head>
-		<link href="<c:url value="/resources/css/adminSubmitFault.css" />" rel="stylesheet">
+		<link href="<c:url value="/resources/css/_mAdminSubmitFault.css" />" rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Submit fault</title>
 		<script>
@@ -43,7 +43,6 @@
 					        	
 					        	<!-- Product id -->
 					        	<tr>
-					        		<td><spring:message code="label.productID"/></td>
 					        		<td>
 					        			<form:select path="productId">
 											<form:option value="" label="Select product type"/>
@@ -51,50 +50,46 @@
 										</form:select>
 					        		</td>
 					        	</tr>
-					        	<tr><td></td>
-					        	<td id="errorMessage"><form:errors path="productId"/></td>
+					        	<tr>
+					        		<td id="errorMessage"><form:errors path="productId"/></td>
 					        	</tr>
 					        	
 					        	
 					        	<!-- Product serial number -->
 					        	<tr>
-					        		<td><spring:message code="label.productSerialNumber"/></td>
 					        		<td>
 					        			<form:input path="productSerialNumber" type="text" placeholder="Serial number"/>
 					        		</td>
 					        	</tr>
-					        	<tr><td></td>
-					        	<td id="errorMessage"><form:errors path="productSerialNumber"/></td>
+					        	<tr>
+					        		<td id="errorMessage"><form:errors path="productSerialNumber"/></td>
 					        	</tr>
 					        	
 					        	
 					        	<!-- Client name -->
 								<tr>
-									<td><spring:message code="label.clientName"/></td>
 									<td>
 										<form:input path="clientName" type="text" placeholder="Name"/>
 									</td>
 								</tr>
-								<tr><td></td>
-					        	<td id="errorMessage"><form:errors path="clientName"/></td>
+								<tr>
+					        		<td id="errorMessage"><form:errors path="clientName"/></td>
 					        	</tr>
 					        	
 								
 								<!-- Client street -->
 								<tr>
-									<td><spring:message code="label.clientStreet"/></td>
 									<td>
 										<form:input path="clientStreet" type="text" placeholder="Street"/>
 									</td>
 								</tr>
-								<tr><td></td>
-					        	<td id="errorMessage"><form:errors path="clientStreet"/></td>
+								<tr>
+					        		<td id="errorMessage"><form:errors path="clientStreet"/></td>
 					        	</tr>
 					        	
 					        	
 					        	<!-- Postal code -->
 								<tr>
-									<td><spring:message code="label.clientPostalCode"/></td>
 									<td>
 										<form:input path="clientPostalCode" type="text" placeholder="Postal code"/>
 									</td>
@@ -104,31 +99,28 @@
 								
 								<!-- Client place -->
 								<tr>
-									<td><spring:message code="label.clientPlace"/></td>
 									<td>
 										<form:input path="clientPlace" type="text" placeholder="Place"/>
 									</td>
 								</tr>
-								<tr><td></td>
-					        	<td id="errorMessage"><form:errors path="clientPlace"/></td>
+								<tr>
+					        		<td id="errorMessage"><form:errors path="clientPlace"/></td>
 					        	</tr>
 					        	
 								
 								<!-- Client phone number one -->
 								<tr>
-									<td><spring:message code="label.clientPhoneOne"/></td>
 									<td>
 										<form:input path="clientPhoneOne" type="text" placeholder="Phone #1"/>
 									</td>
 								</tr>
-								<tr><td></td>
-					        	<td id="errorMessage"><form:errors path="clientPhoneOne"/></td>
+								<tr>
+					        		<td id="errorMessage"><form:errors path="clientPhoneOne"/></td>
 					        	</tr>
 					        	
 								
 								<!-- Client phone number two --> 
 								<tr>
-									<td><spring:message code="label.clientPhoneTwo"/></td>
 									<td>
 										<form:input path="clientPhoneTwo" type="text" placeholder="Phone #2"/>
 									</td>
@@ -136,31 +128,28 @@
 								
 								<!-- Client email --> 
 								<tr>
-									<td><spring:message code="label.clientEmail"/></td>
 									<td>
 										<form:input path="clientEmail" type="text" placeholder="E-mail"/>
 									</td>
 						    	</tr>
-						    	<tr><td></td>
-					        	<td id="errorMessage"><form:errors path="clientEmail"/></td>
+						    	<tr>
+					        		<td id="errorMessage"><form:errors path="clientEmail"/></td>
 					        	</tr>
 					        	
 						    	
 						    	<!-- Fault description --> 
 								<tr>
-									<td><spring:message code="label.faultDescription"/></td>
 									<td>
 										<form:textarea path="faultDescription" cols="30" rows="5" placeholder="Fault description"/>
 						   			</td>
 						   		</tr>
-						   		<tr><td></td>
-					        	<td id="errorMessage"><form:errors path="faultDescription"/></td>
+						   		<tr>
+					        		<td id="errorMessage"><form:errors path="faultDescription"/></td>
 					        	</tr>
 					        	
 						    
 						    	<!-- Fault note --> 
 								<tr>
-									<td><spring:message code="label.faultNote"/></td>
 									<td>
 										<form:textarea path="faultNote" cols="30" rows="5" placeholder="Fault note"/>
 									</td>
@@ -169,7 +158,6 @@
 						    
 						    	<!-- Fault issued to -->
 						    	<tr>
-						    		<td><spring:message code="label.faultIssuedTo"/></td>
 						    		<td>
 						            	<form:select path="faultIssuedTo">
 											<form:option value="" label="Select"/>
@@ -177,14 +165,13 @@
 										</form:select>	
 		            		 		</td>
 		            		 	</tr>
-		            		 	<tr><td></td>
-					        	<td id="errorMessage"><form:errors path="faultIssuedTo"/></td>
+		            		 	<tr>
+					        		<td id="errorMessage"><form:errors path="faultIssuedTo"/></td>
 					        	</tr>
 					        	
 		            		
 		            			<!-- Fault issued by -->
 						    	<tr>
-						    		<td><spring:message code="label.faultIssuedBy"/></td>
 						    		<td>
 						            	<form:select path="faultIssuedBy">
 											<form:option value="" label="Select"/>
@@ -192,14 +179,13 @@
 										</form:select>	
 		            				</td>
 		            		 	</tr>
-		            		 	<tr><td></td>
-					        	<td id="errorMessage"><form:errors path="faultIssuedBy"/></td>
+		            		 	<tr>
+					        		<td id="errorMessage"><form:errors path="faultIssuedBy"/></td>
 					        	</tr>
 					        	
 		            		
 		            			<!-- Fault type -->
 						    	<tr>
-						    		<td><spring:message code="label.faultType"/></td>
 						    		<td>
 						            	<form:select path="faultType">
 											<form:option value="" label="Select"/>
@@ -207,14 +193,13 @@
 										</form:select>	
 		            				</td>
 		            		 	</tr>
-		            		 	<tr><td></td>
-					        	<td id="errorMessage"><form:errors path="faultType"/></td>
+		            		 	<tr>
+					        		<td id="errorMessage"><form:errors path="faultType"/></td>
 					        	</tr>
 					        	
 		            		
 			            		<!-- Fault priority -->
 							    <tr>
-						    		<td><spring:message code="label.faultPriority"/></td>
 						    		<td>
 						            	<form:select path="faultPriority">
 											<form:option value="" label="Select"/>
@@ -222,9 +207,10 @@
 										</form:select>	
 		            				</td>
 		            		 	</tr>
-		            		 	<tr><td></td>
-					        	<td id="errorMessage"><form:errors path="faultPriority"/></td>
-					        	</tr>  
+		            		 	<tr>
+		            		 		<td id="errorMessage"><form:errors path="faultPriority"/></td>
+		            		 	</tr>
+		            		 	  
 		            		 	
 							</table>
 						

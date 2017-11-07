@@ -7,7 +7,7 @@ CREATE TABLE user_roles (
   KEY fk_username_idx (username),
   CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users (username));
   
-ALTER TABLE `webprojectdb`.`user_roles` 
+ALTER TABLE `user_roles` 
 ADD COLUMN `usersName` VARCHAR(45) NULL AFTER `role`;
   
   

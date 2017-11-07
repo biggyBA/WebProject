@@ -8,7 +8,7 @@
 <html>
 
 	<head>
-		<link href="<c:url value="/resources/css/adminEditFault.css" />" rel="stylesheet">
+		<link href="<c:url value="/resources/css/_mAdminEditFault.css" />" rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<style type="text/css">
 		#errorMessage{
@@ -43,7 +43,7 @@
 					        	
 					        	<!-- Product id -->
 					        	<tr>
-					        		<td><spring:message code="label.productID"/></td>
+					        		<td class="label"><spring:message code="label.productID"/></td>
 					        		<td>
 					        			<form:select path="productId">
 											<form:option value="" label="Select product type"/>

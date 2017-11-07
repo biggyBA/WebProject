@@ -4,7 +4,7 @@ CREATE  TABLE users (
   enabled TINYINT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (username));
   
-ALTER TABLE `webprojectdb`.`users` 
+ALTER TABLE `users` 
 ADD COLUMN `usersName` VARCHAR(45) NULL AFTER `enabled`;
   
   
