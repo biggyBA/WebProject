@@ -24,6 +24,8 @@
 	<jsp:include page="../../navigationDrawer.jsp"></jsp:include>
 	
 	<div id="wrapper">
+	Language : <a href="?lang=en">English</a>|<a href="?lang=de">Deutsch</a>
+	Current Locale : ${pageContext.response.locale}
 		
 			<div id="leftBlock">
 			
