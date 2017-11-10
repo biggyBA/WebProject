@@ -4,29 +4,21 @@ import java.net.URI;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ResourceLoaderAware;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
-import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.Barcode128;
-import com.itextpdf.text.pdf.GrayColor;
-import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -35,13 +27,36 @@ import com.lowagie.text.pdf.PdfCell;
 import ba.biggy.config.AbstractITextPdfView;
 import ba.biggy.model.Fault;
 
-public class ServiceReportPDF extends AbstractITextPdfView {
+
+public class ServiceReportPDF extends AbstractITextPdfView implements MessageSourceAware {
 	
+	
+	private MessageSource messageSource;
+	
+	@Override
+	public void setMessageSource(MessageSource messageSource) {
+		this.messageSource = messageSource;
+	}
+	
+	
+	
+		
 
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+		
+		Locale locale = request.getLocale();
+		String message = locale.getLanguage();
+		
+		System.out.println(message);
+		
+		String msg = messageSource.getMessage("customer.name", new Object [] {1,"url"}, Locale.GERMAN);
+		System.out.println(msg);
+		
+		
+		
+		
 		//get a list of faults from model
 		@SuppressWarnings("unchecked")
 		List<Fault> faultList = (List<Fault>) model.get("faults");
@@ -110,7 +125,7 @@ public class ServiceReportPDF extends AbstractITextPdfView {
 		 * First row start
 		 */
 		//create cell for client name label
-		PdfPCell clientNameLabel = new PdfPCell(new Phrase("Client info", headerFont));
+		PdfPCell clientNameLabel = new PdfPCell(new Phrase("", headerFont));
 		clientNameLabel.setColspan(3);
 		clientNameLabel.setBorderWidthTop(0);
 		clientNameLabel.setBorderWidthRight(0);
@@ -303,6 +318,9 @@ public class ServiceReportPDF extends AbstractITextPdfView {
         //document.add(table);
 		
 	}
+
+
+	
 
 	
 

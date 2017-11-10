@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -25,6 +27,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -55,6 +58,7 @@ import ba.biggy.dao.impl.UserInfoDAOImpl;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
+	
 
 	@Bean
 	public DeviceResolverHandlerInterceptor deviceResolverHandlerInterceptor() {
@@ -86,15 +90,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	      return resolver;
 	}
 	
-	/*@Bean
-    public ViewResolver getViewResolver(){
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setOrder(2);
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
-        return resolver;
-    }*/
-	
 	
 	@Bean
 	public LiteDeviceDelegatingViewResolver liteDeviceAwareViewResolver() {
@@ -110,22 +105,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	    return resolver;
 	}
 	
-	/*@Override
-	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-		configurer
-				.defaultContentType(MediaType.TEXT_HTML)
-				.ignoreAcceptHeader(true);
-	}
-	
-	@Override
-	 public void configureViewResolvers(ViewResolverRegistry registry) {
-		registry.jsp("/WEB-INF/views/", ".jsp").viewClass(JstlView.class);
-		registry.enableContentNegotiation(
-				new XlsView(),
-				new XlsxView(),
-				new PdfView());
-	}*/
-	
 	
 	@Bean
 	public MessageSource messageSource() {
@@ -135,8 +114,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	    return messageSource;
 	} 
 	
-    @Bean
-    public CookieLocaleResolver localeResolver(){
+    @Bean (name = "localeResolver")
+    public LocaleResolver localeResolver(){
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
         localeResolver.setDefaultLocale(Locale.GERMAN);
         localeResolver.setCookieName("my-locale-cookie");
