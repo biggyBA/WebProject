@@ -1,8 +1,5 @@
 package ba.biggy.pdf;
 
-import java.net.URI;
-import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -10,12 +7,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Phrase;
@@ -40,30 +38,28 @@ public class ServiceReportPDF extends AbstractITextPdfView implements MessageSou
 	
 	
 	
+	//create needed fonts
+	Font titleFont = new Font(FontFamily.COURIER, 36, Font.BOLD, BaseColor.BLACK);
+	Font headerFont = new Font(FontFamily.COURIER, 20, Font.BOLDITALIC, BaseColor.BLACK);
 		
 
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		//get the current locale
 		Locale locale = request.getLocale();
-		String message = locale.getLanguage();
 		
-		System.out.println(message);
-		
-		String msg = messageSource.getMessage("customer.name", new Object [] {1,"url"}, Locale.GERMAN);
-		System.out.println(msg);
-		
-		
+		/*
+		 * get strings for table headers
+		 */
+		String msg = messageSource.getMessage("ab.testString", null, locale);
 		
 		
 		//get a list of faults from model
 		@SuppressWarnings("unchecked")
 		List<Fault> faultList = (List<Fault>) model.get("faults");
 		
-		//create needed fonts
-		Font titleFont = new Font(FontFamily.COURIER, 36, Font.BOLD, BaseColor.BLACK);
-		Font headerFont = new Font(FontFamily.COURIER, 20, Font.BOLDITALIC, BaseColor.BLACK);
 		
 		//create a table
 		float [] columnWidthsOne = {1};
@@ -71,7 +67,7 @@ public class ServiceReportPDF extends AbstractITextPdfView implements MessageSou
 		serviceReportTable.setWidthPercentage(100);
 		
 		//create top table for title
-		PdfPCell titleCell = new PdfPCell(new Phrase("Service report", titleFont));
+		PdfPCell titleCell = new PdfPCell(new Phrase("testmethod", titleFont));
 		titleCell.setFixedHeight(50);
 		titleCell.setBorderColor(BaseColor.BLACK);
 		titleCell.setBorderWidthTop(0);
@@ -125,7 +121,7 @@ public class ServiceReportPDF extends AbstractITextPdfView implements MessageSou
 		 * First row start
 		 */
 		//create cell for client name label
-		PdfPCell clientNameLabel = new PdfPCell(new Phrase("", headerFont));
+		PdfPCell clientNameLabel = new PdfPCell(new Phrase(msg, headerFont));
 		clientNameLabel.setColspan(3);
 		clientNameLabel.setBorderWidthTop(0);
 		clientNameLabel.setBorderWidthRight(0);
@@ -321,7 +317,6 @@ public class ServiceReportPDF extends AbstractITextPdfView implements MessageSou
 
 
 	
-
 	
 
 }
