@@ -1,9 +1,10 @@
 package ba.biggy.model;
 
 
-import java.util.Date;
 
-import javax.validation.constraints.NotNull;
+import java.sql.Date;
+import java.time.*;
+
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -245,6 +246,8 @@ public class Fault {
 	public void setFaultLng(double faultLng) {
 		this.faultLng = faultLng;
 	}
+
+	
 
 	
 	

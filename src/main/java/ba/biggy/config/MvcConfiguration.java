@@ -37,6 +37,7 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -114,19 +115,26 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	    return messageSource;
 	} 
 	
-    @Bean (name = "localeResolver")
+    /*@Bean (name = "localeResolver")
     public LocaleResolver localeResolver(){
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
         localeResolver.setDefaultLocale(Locale.GERMAN);
         localeResolver.setCookieName("my-locale-cookie");
         localeResolver.setCookieMaxAge(3600);
         return localeResolver;
+    }*/
+    
+    @Bean (name = "localeResolver")
+    public SessionLocaleResolver sessionLocaleResolver() {
+    	SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+    	localeResolver.setDefaultLocale(Locale.GERMAN);
+    	return localeResolver;
     }
 
     @Bean
     public LocaleChangeInterceptor localeInterceptor(){
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-        interceptor.setParamName("lang");
+        interceptor.setParamName("language");
         return interceptor;
     }
 

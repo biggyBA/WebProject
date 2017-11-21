@@ -13,12 +13,13 @@
   	<a href="${pageContext.request.contextPath}/serviceman/myServices">My services</a>
 	<a href="${pageContext.request.contextPath}/serviceman/serviceReport">Service report</a>					
   </sec:authorize>
-  <a href="${pageContext.request.contextPath}/test">Test</a>
+  <a href="${pageContext.request.contextPath}/test" target="_blank">Test</a>
   <c:if test="${pageContext.request.userPrincipal.name != null}">
      | &nbsp;
      <a href="${pageContext.request.contextPath}/logout">Logout</a>
   </c:if>
 </div>
+
 
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
 <style>

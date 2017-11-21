@@ -58,6 +58,8 @@
 				<c:if test="${pageContext.request.userPrincipal.name != null}">
 					${pageContext.request.userPrincipal.name}
 				</c:if>
+				Language : <a href="?language=en">English</a>|<a href="?language=de">Deutsch</a>
+				Current Locale : ${pageContext.response.locale}
 			
 				<a href="#wrapper">Top</a>
 			</div>	
