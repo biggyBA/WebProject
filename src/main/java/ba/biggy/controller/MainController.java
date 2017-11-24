@@ -196,7 +196,21 @@ public class MainController {
     	model.addAttribute("toDoFaults", faultDAO.listToDoFaults());
     	return "toDoFaultsHtmlView";
     }
+    
+    @GetMapping("/getPdfFaults")
+    public ModelAndView getPdfFaultsReport (ModelAndView model) {
+    	model.addObject("toDoFaults", faultDAO.listToDoFaults());
+    	model.setViewName("toDoFaultsPdfView");
+    	return model;
+    }
    
+    @GetMapping("/getxlsxFaults")
+    public ModelAndView getXlsxFaultsReport (ModelAndView model) {
+    	Fault faults = faultDAO.getFaultById(1);
+    	model.addObject("toDoFaults", faults);
+    	model.setViewName("toDoFaultsXlsxView");
+    	return model;
+    }
     
    
     
