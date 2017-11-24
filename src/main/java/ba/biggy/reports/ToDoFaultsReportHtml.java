@@ -1,6 +1,8 @@
 package ba.biggy.reports;
 
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +23,11 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.HtmlExporter;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleHtmlExporterOutput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 
 @Component("toDoFaultsHtmlView")
 public class ToDoFaultsReportHtml extends AbstractView {
@@ -32,7 +37,9 @@ public class ToDoFaultsReportHtml extends AbstractView {
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		response.setContentType("text/html");
+		//response.setContentType("text/html");
+		response.setContentType("application/pdf");
+		
 		List<Fault> faults = (List<Fault>) model.get("toDoFaults");
 		//data source
         JRDataSource dataSource = getDataSource(faults);
@@ -41,12 +48,20 @@ public class ToDoFaultsReportHtml extends AbstractView {
         //fill the report with data source objects
         JasperPrint jasperPrint = JasperFillManager.fillReport(report, null, dataSource);
         //export to html
-        HtmlExporter exporter = new HtmlExporter(DefaultJasperReportsContext.getInstance());
-        exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-        exporter.setExporterOutput(new SimpleHtmlExporterOutput(response.getWriter()));
-        exporter.exportReport();
+        //HtmlExporter exporter = new HtmlExporter(DefaultJasperReportsContext.getInstance());
+        //exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+        //exporter.setExporterOutput(new SimpleHtmlExporterOutput(response.getWriter()));
+        //exporter.exportReport();
+        final OutputStream outStream = response.getOutputStream();
         
+        JRPdfExporter exporter2 = new JRPdfExporter();
+        exporter2.setExporterInput(new SimpleExporterInput(jasperPrint));
+        exporter2.setExporterOutput(new SimpleOutputStreamExporterOutput(outStream));
+        //SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
+        //configuration.setMetadataAuthor("Petter");  //why not set some config as we like
         
+        //exporter2.setConfiguration(configuration);
+        exporter2.exportReport();
 		
 	}
 	
