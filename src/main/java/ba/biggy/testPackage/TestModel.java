@@ -1,4 +1,4 @@
-package testPackage;
+package ba.biggy.testPackage;
 
 import org.springframework.beans.factory.annotation.Value;
 

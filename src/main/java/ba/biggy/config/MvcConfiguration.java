@@ -81,13 +81,20 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	    return new DeviceHandlerMethodArgumentResolver();
 	}
 	
-	
-
+	//used to scan components for jasper reports
 	@Bean
-	public ViewResolver beanNameViewResolver() {
+    public ViewResolver beanNameViewResolver() {
+        BeanNameViewResolver resolver = new BeanNameViewResolver();
+        resolver.setOrder(0);
+        return resolver;
+    }
+
+	
+	@Bean
+	public ViewResolver beanNameViewResolver2() {
 	      ResourceBundleViewResolver resolver = new ResourceBundleViewResolver();
 	      resolver.setOrder(1);
-	      resolver.setBasename("views");
+	      resolver.setBasename("itextpdf-views");
 	      return resolver;
 	}
 	

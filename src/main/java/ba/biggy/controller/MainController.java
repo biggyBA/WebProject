@@ -1,8 +1,13 @@
 package ba.biggy.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Currency;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -22,7 +27,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +38,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ba.biggy.dao.FaultDAO;
 import ba.biggy.model.Fault;
 import ba.biggy.model.UserInfo;
+import ba.biggy.testPackage.CurrencyRate;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 
 
 
@@ -141,6 +150,9 @@ public class MainController {
 		model.setViewName("myPdfView");
 	       return model;
 	   }
+    
+    
+    
 	
     
     private boolean hasRole(String role) {
@@ -155,5 +167,75 @@ public class MainController {
 		  }
 		  return hasRole;
 		}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @GetMapping("/exchangeRates")
+    public String handleForexRequest(Model model) {
+        model.addAttribute("todayCurrencyRates", getTodayForexRates());
+        return "forexView";
+    }
+    
+    @GetMapping("/getHtmlFaults")
+    public String getHtmlFaultsReport (Model model) {
+    	model.addAttribute("toDoFaults", faultDAO.listToDoFaults());
+    	return "toDoFaultsHtmlView";
+    }
+   
+    
+   
+    
+    private List<CurrencyRate> getTodayForexRates() {
+        //dummy rates
+        List<CurrencyRate> currencyRates = new ArrayList<>();
+        Date today = new Date();
+        List<Currency> currencies = new ArrayList<>(Currency.getAvailableCurrencies());
+
+        for (int i = 0; i < currencies.size(); i += 2) {
+            String currencyPair = currencies.get(i) + "/" + currencies.get(i + 1);
+            CurrencyRate cr = new CurrencyRate();
+            cr.setCurrencyPair(currencyPair);
+            cr.setDate(today);
+            BigDecimal bidPrice = new BigDecimal(Math.random() * 5 + 1);
+            bidPrice = bidPrice.setScale(3, RoundingMode.CEILING);
+            cr.setBidPrice(bidPrice);
+            BigDecimal askPrice = new BigDecimal(bidPrice.doubleValue() + Math.random() * 2 + 0.5);
+            askPrice = askPrice.setScale(3, RoundingMode.CEILING);
+            cr.setAskPrice(askPrice);
+
+            currencyRates.add(cr);
+        }
+        return currencyRates;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }
