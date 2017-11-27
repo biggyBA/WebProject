@@ -39,23 +39,19 @@ public class ToDoFaultsReportXlsx extends AbstractView {
 		
 		response.setContentType("application/xlsx");
 		
-		Fault faults =  (Fault) model.get("toDoFaults");
-		Object[] fa = {faults};
+		List<Fault> faults = (List<Fault>) model.get("toDoFaults");
 		//data source
-        //JRDataSource dataSource = getDataSource(faults);
-		JRMapArrayDataSource dataSource = new JRMapArrayDataSource(fa);
+        JRDataSource dataSource = getDataSource(faults);
         //compile jrxml template and get report
         JasperReport report = getReport();
         //fill the report with data source objects
         JasperPrint jasperPrint = JasperFillManager.fillReport(report, null, dataSource);
         
-       
         
-
         JRXlsxExporter exporter = new JRXlsxExporter();
         exporter.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
         
-		exporter.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME, "adsf.xlsx");
+		exporter.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME, "C://sample_report.xls");
 
         exporter.exportReport();
 		

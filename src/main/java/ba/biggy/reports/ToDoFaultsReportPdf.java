@@ -34,6 +34,7 @@ public class ToDoFaultsReportPdf extends AbstractView {
 		
 		response.setContentType("application/pdf");
 		
+		@SuppressWarnings("unchecked")
 		List<Fault> faults = (List<Fault>) model.get("toDoFaults");
 		//data source
         JRDataSource dataSource = getDataSource(faults);

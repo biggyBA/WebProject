@@ -206,8 +206,7 @@ public class MainController {
    
     @GetMapping("/getxlsxFaults")
     public ModelAndView getXlsxFaultsReport (ModelAndView model) {
-    	Fault faults = faultDAO.getFaultById(1);
-    	model.addObject("toDoFaults", faults);
+    	model.addObject("toDoFaults", faultDAO.listToDoFaults());
     	model.setViewName("toDoFaultsXlsxView");
     	return model;
     }
