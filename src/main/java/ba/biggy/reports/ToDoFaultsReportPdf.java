@@ -2,6 +2,7 @@ package ba.biggy.reports;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +13,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.AbstractView;
 
 import ba.biggy.model.Fault;
+import ba.biggy.model.TestModel;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
@@ -36,8 +39,10 @@ public class ToDoFaultsReportPdf extends AbstractView {
 		
 		@SuppressWarnings("unchecked")
 		List<Fault> faults = (List<Fault>) model.get("toDoFaults");
+		int faultCount = (int) model.get("faultCount");
+		Fault fault = (Fault) model.get("faultById");
 		//data source
-        JRDataSource dataSource = getDataSource(faults);
+        JRDataSource dataSource = getDataSource(faults, faultCount, fault);
         //compile jrxml template and get report
         JasperReport report = getReport();
         //fill the report with data source objects
@@ -54,6 +59,16 @@ public class ToDoFaultsReportPdf extends AbstractView {
         //exporter2.setConfiguration(configuration);
         exporter.exportReport();
 		
+	}
+	
+	private JRDataSource getDataSource (List<Fault> faults, int faultCount, Fault fault) {
+		TestModel tm = new TestModel();
+		tm.setFaultCount(faultCount);
+		tm.setFault(fault);
+		
+		Object [] myObj = {tm};
+		JRBeanArrayDataSource dataSource = new JRBeanArrayDataSource(myObj);
+		return dataSource;
 	}
 	
 	private JRDataSource getDataSource (List<Fault> faults) {

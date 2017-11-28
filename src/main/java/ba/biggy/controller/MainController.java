@@ -200,6 +200,8 @@ public class MainController {
     @GetMapping("/getPdfFaults")
     public ModelAndView getPdfFaultsReport (ModelAndView model) {
     	model.addObject("toDoFaults", faultDAO.listToDoFaults());
+    	model.addObject("faultCount", faultDAO.toDoFaultCount());
+    	model.addObject("faultById", faultDAO.getFaultById(31));
     	model.setViewName("toDoFaultsPdfView");
     	return model;
     }

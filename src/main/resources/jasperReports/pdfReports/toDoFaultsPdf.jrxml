@@ -4,41 +4,26 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="clientName" class="java.lang.String"/>
-	<field name="clientPhoneOne" class="java.lang.String"/>
+	<field name="faultCount" class="java.lang.Integer"/>
+	<field name="fault" class="ba.biggy.model.TestModel"/>
 	<columnHeader>
-		<band height="50">
-			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="120" height="50" backcolor="#FFFFFF" uuid="b3dea6ae-670a-4edf-8a7a-2215a355054f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Currency Pair PDF]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="120" y="0" width="120" height="50" uuid="045dfa70-e338-4547-986f-4c56d1ad4abe"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Date]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="25">
+		<band height="58">
 			<textField>
 				<reportElement x="0" y="0" width="120" height="25" uuid="815ba72a-3bcb-4dbd-8bfd-34122c33cf4d"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{clientName}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{faultCount}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd.MM.yyyy">
-				<reportElement x="120" y="0" width="120" height="25" uuid="4b47ce6a-1cce-42b6-8e46-f4371b7de8ba"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{clientPhoneOne}]]></textFieldExpression>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="41">
+			<textField>
+				<reportElement x="0" y="0" width="180" height="30" uuid="ab883a1b-a5a9-42ae-ae14-d36a4269edcc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2e0b66a8-a144-4b0e-b0da-229df92c707a"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{fault}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
